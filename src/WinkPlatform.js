@@ -27,9 +27,16 @@ export default class WinkPlatform {
       onChange: this.handleAccessoryStateChange.bind(this)
     });
     this.client = new WinkClient(log, this.config);
+    this.groupId = null;
+    this.groupInterval = null;
+    this.groupTimeout = null;
     this.interval = null;
     this.subscriptions = new Subscriptions();
 
+    this.subscriptions.on("message", () => {
+      clearTimeout(this.groupTimeout);
+      this.resetPubNubCheck();
+    });
     this.subscriptions.on("device-list", () => this.refreshDevices());
     this.subscriptions.on("device-update", device => {
       this.log(
@@ -65,7 +72,7 @@ export default class WinkPlatform {
   }
 
   configureAccessory(accessory) {
-    this.patchAccessory(accessory, accessory.context);
+    this.patchAccessory(accessory);
     this.accessories.add(accessory);
     this.log(
       `Loaded from cache: ${accessory.context.name} (${accessory.context.object_type}/${accessory.context.object_id})`
@@ -73,7 +80,12 @@ export default class WinkPlatform {
   }
 
   patchAccessory(accessory, device) {
-    accessory.definition = this.accessoryHelper.getDefinition(device);
+    if (device) {
+      accessory.context = device;
+    }
+    accessory.definition = this.accessoryHelper.getDefinition(
+      accessory.context
+    );
     Object.defineProperty(accessory, "merged_state", {
       get: function() {
         return {
@@ -92,7 +104,10 @@ export default class WinkPlatform {
         this.accessoryHelper.configureAccessory(accessory, false);
       });
 
+      this.createAndSubscribeToGroup();
+
       this.interval = setInterval(() => this.refreshDevices(), 60 * 60 * 1000);
+      this.resetPubNubCheck();
 
       this.refreshDevices();
     }
@@ -140,6 +155,41 @@ export default class WinkPlatform {
     } catch (e) {
       this.log.error("Failed to refresh devices.", e);
     }
+  }
+
+  async createAndSubscribeToGroup() {
+    const response = await this.client.getGroups();
+    let group = response.data.find(group =>
+      group.name.startsWith("homebridge_")
+    );
+
+    if (!group) {
+      const create_response = await this.client.createHomebridgeGroup();
+      group = create_response.data;
+    }
+
+    this.groupId = group.group_id;
+    this.subscriptions.subscribe(group.subscription);
+  }
+
+  resetPubNubCheck() {
+    clearTimeout(this.groupInterval);
+    this.groupInterval = setTimeout(
+      () => this.checkPubNubConnection(),
+      1 * 60 * 1000
+    );
+  }
+
+  checkPubNubConnection() {
+    this.groupTimeout = setTimeout(() => {
+      this.log("No PubNub notification!!!");
+    }, 2 * 60 * 1000);
+
+    this.log("Checking PubNub");
+    this.client.updateHomebridgeGroup(this.groupId).catch(e => {
+      this.log.error("Failed to update homebridge group.", e);
+      clearTimeout(this.groupTimeout);
+    });
   }
 
   annotateDevices(devices) {

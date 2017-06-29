@@ -14,18 +14,19 @@ export default ({ Characteristic, Service }) => {
         characteristics: [
           {
             characteristic: Characteristic.On,
+            supported: state => isLightBulb,
             get: state => state.powered,
             set: value => ({ powered: !!value })
           },
           {
             characteristic: Characteristic.Brightness,
-            supported: state => state.brightness !== undefined,
+            supported: state => state.brightness !== undefined && isLightBulb,
             get: state => Math.floor(state.brightness * 100),
             set: value => ({ brightness: value / 100 })
           },
           {
             characteristic: Characteristic.Hue,
-            supported: state => state.hue !== undefined,
+            supported: state => state.hue !== undefined && isLightBulb,
             get: state => Math.floor(state.hue * 360),
             set: (value, accessory) => {
               const state = accessory.merged_state;
@@ -39,7 +40,7 @@ export default ({ Characteristic, Service }) => {
           },
           {
             characteristic: Characteristic.Saturation,
-            supported: state => state.saturation !== undefined,
+            supported: state => state.saturation !== undefined && isLightBulb,
             get: state => Math.floor(state.saturation * 100),
             set: (value, accessory) => {
               const state = accessory.merged_state;
@@ -59,12 +60,13 @@ export default ({ Characteristic, Service }) => {
         characteristics: [
           {
             characteristic: Characteristic.On,
+            supported: state => isFan,
             get: state => state.powered,
             set: value => ({ powered: !!value })
           },
           {
             characteristic: Characteristic.RotationSpeed,
-            supported: state => state.brightness !== undefined,
+            supported: state => state.brightness !== undefined && isFan,
             get: state => Math.floor(state.brightness * 100),
             set: value => ({ brightness: value / 100 })
           }

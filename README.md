@@ -98,6 +98,7 @@ See [DEVICES.md](DEVICES.md) for more detailed information.
 | [Air Conditioners](DEVICES.md#air-conditioners) | `air_conditioner` | `air_conditioners` |
 | [Binary Switches](DEVICES.md#binary-switches)   | `binary_switch`   | `binary_switches`  |
 | [Cameras](DEVICES.md#cameras)                   | `camera`          | `cameras`          |
+| [Door Bells](DEVICES.md#door-bells)             | `door_bell`       | `door_bells`       |
 | [Fans](DEVICES.md#fans)                         | `fan`             | `fans`             |
 | [Garage Doors](DEVICES.md#garage-doors)         | `garage_door`     | `garage_doors`     |
 | [Light Bulbs](DEVICES.md#light-bulbs)           | `light_bulb`      | `light_bulbs`      |

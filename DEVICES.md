@@ -36,6 +36,12 @@ Limitations:
 * Can not view video feed.
 * Cameras other than Canary are not added as a security system (as I'm not sure which modes each camera supports and how they map to HomeKit states).
 
+## Door Bells
+
+_Ring_
+
+* Added to HomeKit as motion detector.
+
 ## Fans
 
 _Home Decorators Collection fans_

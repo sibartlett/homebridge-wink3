@@ -91,6 +91,14 @@ export default class AccessoryHelper {
     });
   }
 
+  removeDeprecatedServices(accessory, newAccessory) {
+    const configuredServices = newAccessory.services.map(s => s.UUID);
+
+    accessory.services
+      .filter(s => !configuredServices.includes(s.UUID))
+      .forEach(s => accessory.removeService(s));
+  }
+
   readAccessory(accessory, get, callback) {
     // First argument is current state
     // Second argument is desired state (merged state)

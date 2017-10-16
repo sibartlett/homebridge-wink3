@@ -131,7 +131,11 @@ export default class WinkPlatform {
 
     if (authenticated) {
       this.accessories.forEach(accessory => {
+        const device = accessory.context;
+        const newAccessory = this.getNewAccessory(device);
+
         this.accessoryHelper.configureAccessory(accessory);
+        this.accessoryHelper.removeDeprecatedServices(accessory, newAccessory);
       });
 
       this.interval = setInterval(() => this.refreshDevices(), 60 * 60 * 1000);
@@ -140,7 +144,7 @@ export default class WinkPlatform {
     }
   }
 
-  addDevice(device) {
+  getNewAccessory(device) {
     const { uuid } = this.api.hap;
     const deviceId = uuid.isValid(device.uuid)
       ? device.uuid
@@ -148,6 +152,11 @@ export default class WinkPlatform {
     const accessory = new this.api.platformAccessory(device.name, deviceId);
     this.patchAccessory(accessory, device);
     this.accessoryHelper.configureAccessory(accessory);
+    return accessory;
+  }
+
+  addDevice(device) {
+    const accessory = this.getNewAccessory(device);
     this.api.registerPlatformAccessories(pluginName, platformName, [accessory]);
     this.accessories.add(accessory);
     this.log(

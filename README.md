@@ -56,7 +56,6 @@ Requires Node.js 6 or later.
 | `hide_groups`   |          | List of Wink Device Groups/Types that will be hidden from Homebridge. (see Device Support table below) |
 | `hide_ids`      |          | List of Wink IDs that will be hidden from Homebridge. |
 | `fan_ids`       |          | List of Wink IDs (for binary switches or light switches/dimmers) that will be added as fans to Homebridge. |
-| `window_ids`    |          | List of Wink IDs that will be added as windows (instead of doors) to Homebridge. |
 | `direct_access` |          | Attempt to establish direct communication with the Wink hub. Defaults to `true`. |
 
 ## Authentication

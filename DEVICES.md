@@ -81,20 +81,17 @@ Limitations:
 _Spotter, Tripper and other PIR and Door/Window Sensors_
 
 * The following sensors are supported:
+  * Door and Window sensors
   * Humidity sensor
   * Motion sensor (PIR reports as Motion Detector)
   * Occupancy sensor
   * Temperature sensor
   * Water sensor (leak detector)
-* Door Sensors report as Doors by default. However, can be added to HomeKit as a window:
-  * using `window_ids` optional configuration field, or
-  * automatically if device's name contains the word "window" (such as "Living Room Window")
 * Reports Battery Level (where available).
 
 Limitations:
 
 * Spotter does not report brightness, vibration or loudness to HomeKit. Apple expects values and these are simply reported as yes/no concerning if it changed.
-* Door/Window Tamper Detection is not available in HomeKit.
 
 ## Shades
 

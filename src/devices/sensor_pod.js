@@ -1,17 +1,5 @@
 import { batteryService } from "./_shared";
 
-const isWindow = (state, device, config) => {
-  if (config.window_ids.indexOf(device.object_id) !== -1) {
-    return true;
-  }
-
-  return state.opened !== undefined && /\bwindow\b/i.test(device.name);
-};
-
-const isDoor = (state, device, config) => {
-  return state.opened !== undefined && !isWindow(state, device, config);
-};
-
 export default ({ Characteristic, Service }) => {
   return {
     type: "sensor_pod",
@@ -78,30 +66,17 @@ export default ({ Characteristic, Service }) => {
         ]
       },
       {
-        service: Service.Door,
-        supported: isDoor,
+        service: Service.ContactSensor,
+        supported: state => state.opened !== undefined,
         characteristics: [
           {
-            characteristic: Characteristic.CurrentPosition,
-            get: state => (state.opened ? 100 : 0)
+            characteristic: Characteristic.ContactSensorState,
+            get: state => (state.opened ? 1 : 0)
           },
           {
-            characteristic: Characteristic.PositionState,
-            value: Characteristic.PositionState.STOPPED
-          }
-        ]
-      },
-      {
-        service: Service.Window,
-        supported: isWindow,
-        characteristics: [
-          {
-            characteristic: Characteristic.CurrentPosition,
-            get: state => (state.opened ? 100 : 0)
-          },
-          {
-            characteristic: Characteristic.PositionState,
-            value: Characteristic.PositionState.STOPPED
+            characteristic: Characteristic.StatusTampered,
+            supported: state => state.tamper_detected !== undefined,
+            get: state => state.tamper_detected
           }
         ]
       },

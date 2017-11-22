@@ -1,9 +1,13 @@
 import childProcess from "child_process";
 import fs from "fs";
+
 import _ from "lodash";
 import compareVersions from "compare-versions";
+import Joi from "joi";
+
 import Accessories from "./Accessories";
 import AccessoryHelper from "./AccessoryHelper";
+import configSchema from "./configSchema";
 import devices from "./devices";
 import Subscriptions from "./Subscriptions";
 import WinkClient from "./WinkClient";
@@ -16,6 +20,12 @@ export default class WinkPlatform {
   constructor(log, config, api) {
     if (!config) {
       log("Plugin not configured.");
+      return;
+    }
+
+    const result = Joi.validate(config, configSchema);
+    if (result.error) {
+      log.error("Invalid config.", result.error.message);
       return;
     }
 
@@ -101,6 +111,10 @@ export default class WinkPlatform {
   }
 
   configureAccessory(accessory) {
+    if (!this.accessories) {
+      return;
+    }
+
     this.patchAccessory(accessory);
     this.accessories.add(accessory);
     this.log(

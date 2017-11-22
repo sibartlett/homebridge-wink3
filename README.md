@@ -6,7 +6,7 @@ Yet another Wink plugin for [homebridge](https://github.com/nfarina/homebridge).
 * Subscribes to Wink push notifications, instead of polling for device updates.
 * Written in ES7 (arrow functions, async/await, classes).
 * Accessory services and characteristics are defined declaratively.
-* Supports 3 methods of [authentication](#authentication) including API tokens obtained from [developer.wink.com](https://developer.wink.com)
+* Supports 2 methods of [authentication](#authentication) including API tokens obtained from [developer.wink.com](https://developer.wink.com)
 
 ## Contents
 
@@ -15,7 +15,6 @@ Yet another Wink plugin for [homebridge](https://github.com/nfarina/homebridge).
 3. [Authentication](#authentication)
     1. [OAuth Authorization Code](#oauth-authorization-code)
     2. [OAuth Password Grant](#oauth-password-grant)
-    3. [Android client ID](#android-client-id)
 4. [Device support](#device-support)
 4. [FAQ](#faq)
 5. [Acknowledgements](#acknowledgements)
@@ -49,10 +48,10 @@ Requires Node.js 6 or later.
 | --------------- | -------- | ---------------------------------------------- |
 | `platform`      | X        | Must always be "Wink".                         |
 | `name`          | X        | Can be anything.                               |
-| `client_id`     | *        | See [Authentication](#authentication) |
-| `client_secret` | *        | See [Authentication](#authentication) |
-| `username`     | *        | See [Authentication](#authentication) |
-| `password` | *        | See [Authentication](#authentication) |
+| `client_id`     | X        | See [Authentication](#authentication) |
+| `client_secret` | X        | See [Authentication](#authentication) |
+| `username`      | *        | See [Authentication](#authentication) |
+| `password`      | *        | See [Authentication](#authentication) |
 | `hide_groups`   |          | List of Wink Device Groups/Types that will be hidden from Homebridge. (see Device Support table below) |
 | `hide_ids`      |          | List of Wink IDs that will be hidden from Homebridge. |
 | `fan_ids`       |          | List of Wink IDs (for binary switches or light switches/dimmers) that will be added as fans to Homebridge. |
@@ -64,7 +63,6 @@ homebridge-wink3 supports 3 methods of authentication.
 
 * [OAuth Authorization Code](#oauth-authorization-code) (Preferred)
 * [OAuth Password Grant](#oauth-password-grant)
-* [Android client ID](#android-client-id)
 
 #### OAuth Authorization Code
 
@@ -91,12 +89,6 @@ If you have old Wink API credentials that support OAuth password grant.
 
 You need to provide the following configuration options: `client_id`, `client_secret`, `username` and `password`
 
-#### Android client ID
-
-If you'd prefer to use the client ID and secret associated with Wink's Android app.
-
-You need to provide the following configuration options: `username` and `password`
-
 ## Device support
 
 See [DEVICES.md](DEVICES.md) for more detailed information.
@@ -122,7 +114,7 @@ See [DEVICES.md](DEVICES.md) for more detailed information.
 
 #### Chamberlain garage opener does not seem to response to commands
 
-Unfortunately, Chamberlain garage openers are only controllable when using [Android client ID authentication](#android-client-id). ([Source](https://github.com/python-wink/python-wink/issues/23#issuecomment-197431701))
+Unfortunately, Chamberlain garage openers are only controllable when using a Client ID and Secret obtained from one of the official Wink apps. ([Source](https://github.com/python-wink/python-wink/issues/23#issuecomment-197431701))
 
 #### GoControl garage opener does not seem to response to commands
 

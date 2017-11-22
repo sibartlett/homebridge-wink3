@@ -6,9 +6,6 @@ import ip from "ip";
 import request from "request-promise-native";
 import debounce from "./debounce";
 
-const android_client_id = "quirky_wink_android_app";
-const android_client_secret = "e749124ad386a5a35c0ab554a4f2c045";
-
 export default class WinkClient {
   constructor({ config, log, updateConfig }) {
     this.config = config;
@@ -32,7 +29,7 @@ export default class WinkClient {
     const accessToken = hub ? hub.access_token : this.config.access_token;
     const headers = {
       "User-Agent":
-        "Manufacturer/Apple-iPhone8_1 iOS/10.3.1 WinkiOS/5.8.0.27-production-release (Scale/2.00)"
+        "Manufacturer/Apple-iPhone8_1 iOS/11.1.1 WinkiOS/6.5.1.0-production-release (Scale/2.00)"
     };
 
     if (accessToken && options.uri !== "/oauth2/token") {
@@ -78,8 +75,8 @@ export default class WinkClient {
     this.log("Refreshing access token...");
     return this.getToken({
       grant_type: "refresh_token",
-      client_id: this.config.client_id || android_client_id,
-      client_secret: this.config.client_secret || android_client_secret,
+      client_id: this.config.client_id,
+      client_secret: this.config.client_secret,
       refresh_token: this.config.refresh_token
     })
       .then(response => {
@@ -107,8 +104,8 @@ export default class WinkClient {
       if (this.config.username && this.config.password) {
         return resolve({
           grant_type: "password",
-          client_id: this.config.client_id || android_client_id,
-          client_secret: this.config.client_secret || android_client_secret,
+          client_id: this.config.client_id,
+          client_secret: this.config.client_secret,
           username: this.config.username,
           password: this.config.password
         });
@@ -272,8 +269,8 @@ export default class WinkClient {
           scope: "local_control",
           grant_type: "refresh_token",
           refresh_token: this.config.refresh_token,
-          client_id: this.config.client_id || android_client_id,
-          client_secret: this.config.client_secret || android_client_secret
+          client_id: this.config.client_id,
+          client_secret: this.config.client_secret
         }
       });
 

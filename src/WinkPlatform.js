@@ -55,7 +55,9 @@ export default class WinkPlatform {
     this.subscriptions.on("device-list", () => this.refreshDevices());
     this.subscriptions.on("device-update", device => {
       this.log(
-        `Received update notification: ${device.name} (${device.object_type}/${device.object_id})`
+        `Received update notification: ${device.name} (${device.object_type}/${
+          device.object_id
+        })`
       );
       this.updateDevice(device);
     });
@@ -95,6 +97,8 @@ export default class WinkPlatform {
       fan_ids: [],
       hide_groups: [],
       hide_ids: [],
+      outlet_ids: [],
+      switch_ids: [],
       window_ids: [],
       ...config
     };
@@ -118,8 +122,9 @@ export default class WinkPlatform {
     this.patchAccessory(accessory);
     this.accessories.add(accessory);
     this.log(
-      `Loaded from cache: ${accessory.context.name} (${accessory.context
-        .object_type}/${accessory.context.object_id})`
+      `Loaded from cache: ${accessory.context.name} (${
+        accessory.context.object_type
+      }/${accessory.context.object_id})`
     );
   }
 
@@ -174,8 +179,9 @@ export default class WinkPlatform {
     this.api.registerPlatformAccessories(pluginName, platformName, [accessory]);
     this.accessories.add(accessory);
     this.log(
-      `Added: ${accessory.context.name} (${accessory.context
-        .object_type}/${accessory.context.object_id})`
+      `Added: ${accessory.context.name} (${accessory.context.object_type}/${
+        accessory.context.object_id
+      })`
     );
   }
 
@@ -281,8 +287,9 @@ export default class WinkPlatform {
         accessory
       ]);
       this.log(
-        `Removed: ${accessory.context.name} (${accessory.context
-          .object_type}/${accessory.context.object_id})`
+        `Removed: ${accessory.context.name} (${accessory.context.object_type}/${
+          accessory.context.object_id
+        })`
       );
     }
   }

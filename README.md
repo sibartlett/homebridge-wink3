@@ -117,6 +117,8 @@ See [DEVICES.md](DEVICES.md) for more detailed information.
 
 Unfortunately, Chamberlain garage openers are only controllable when using a Client ID and Secret obtained from one of the official Wink apps. ([Source](https://github.com/python-wink/python-wink/issues/23#issuecomment-197431701))
 
+Chamberlain now offer official HomeKit support using the [MyQ® Home Bridge](https://www.chamberlain.com/apple-partnership).
+
 #### GoControl garage opener does not seem to response to commands
 
 It has been reported that GoControl garage openers do not respond when using OAuth Password Grant, instead I recommend using [OAuth Authorization Code](#oauth-authorization-code). ([Source](https://github.com/sibartlett/homebridge-wink3/issues/21))

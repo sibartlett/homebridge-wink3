@@ -59,7 +59,7 @@ Requires Node.js 6 or later.
 
 ## Authentication
 
-homebridge-wink3 supports 3 methods of authentication.
+homebridge-wink3 supports 2 methods of authentication.
 
 * [OAuth Authorization Code](#oauth-authorization-code) (Preferred)
 * [OAuth Password Grant](#oauth-password-grant)

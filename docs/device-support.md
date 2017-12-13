@@ -1,5 +1,22 @@
 # Device support
 
+| Category                              | Device Type       | Device Group       |
+|---------------------------------------|-------------------|--------------------|
+| [Air Conditioners](#air-conditioners) | `air_conditioner` | `air_conditioners` |
+| [Binary Switches](#binary-switches)   | `binary_switch`   | `binary_switches`  |
+| [Cameras](#cameras)                   | `camera`          | `cameras`          |
+| [Door Bells](#door-bells)             | `door_bell`       | `door_bells`       |
+| [Fans](#fans)                         | `fan`             | `fans`             |
+| [Garage Doors](#garage-doors)         | `garage_door`     | `garage_doors`     |
+| [Light Bulbs](#light-bulbs)           | `light_bulb`      | `light_bulbs`      |
+| [Locks](#locks)                       | `lock`            | `locks`            |
+| [Propane Tanks](#propane-tanks)       | `propane_tank`    | `propane_tanks`    |
+| [Sensors](#sensors)                   | `sensor_pod`      | `sensor_pods`      |
+| [Shades](#shades)                     | `shade`           | `shades`           |
+| [Sirens](#sirens)                     | `siren`           | `sirens`           |
+| [Smoke Detectors](#smoke-detectors)   | `smoke_detector`  | `smoke_detectors`  |
+| [Thermostats](#thermostats)           | `thermostat`      | `thermostats`      |
+
 ## Air Conditioners
 
 _Wink Aros_
@@ -60,6 +77,9 @@ Limitations:
 Limitations:
 
 * Does not identify blocked doors due to limitation in Wink Interface.
+* Chamberlain garage openers are only controllable when using a Client ID and Secret obtained from one of the official Wink apps. ([Source](https://github.com/python-wink/python-wink/issues/23#issuecomment-197431701))
+
+Chamberlain now offer official HomeKit support using the [MyQ® Home Bridge](https://www.chamberlain.com/apple-partnership).
 
 ## Light Bulbs
 

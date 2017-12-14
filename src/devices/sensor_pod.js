@@ -1,6 +1,13 @@
 import { batteryService } from "./_shared";
 
 export default ({ Characteristic, Service }) => {
+  const {
+    ContactSensorState,
+    LeakDetected,
+    OccupancyDetected,
+    StatusTampered
+  } = Characteristic;
+
   return {
     type: "sensor_pod",
     group: "sensor_pods",
@@ -10,13 +17,19 @@ export default ({ Characteristic, Service }) => {
         supported: state => state.occupied !== undefined,
         characteristics: [
           {
-            characteristic: Characteristic.OccupancyDetected,
-            get: state => state.occupied
+            characteristic: OccupancyDetected,
+            get: state =>
+              state.occupied
+                ? OccupancyDetected.OCCUPANCY_DETECTED
+                : OccupancyDetected.OCCUPANCY_NOT_DETECTED
           },
           {
-            characteristic: Characteristic.StatusTampered,
+            characteristic: StatusTampered,
             supported: state => state.tamper_detected !== undefined,
-            get: state => state.tamper_detected
+            get: state =>
+              state.tamper_detected
+                ? StatusTampered.TAMPERED
+                : StatusTampered.NOT_TAMPERED
           }
         ]
       },
@@ -29,9 +42,12 @@ export default ({ Characteristic, Service }) => {
             get: state => state.motion
           },
           {
-            characteristic: Characteristic.StatusTampered,
+            characteristic: StatusTampered,
             supported: state => state.tamper_detected !== undefined,
-            get: state => state.tamper_detected
+            get: state =>
+              state.tamper_detected
+                ? StatusTampered.TAMPERED
+                : StatusTampered.NOT_TAMPERED
           }
         ]
       },
@@ -50,8 +66,11 @@ export default ({ Characteristic, Service }) => {
         supported: state => state.liquid_detected !== undefined,
         characteristics: [
           {
-            characteristic: Characteristic.LeakDetected,
-            get: state => state.liquid_detected
+            characteristic: LeakDetected,
+            get: state =>
+              state.liquid_detected
+                ? LeakDetected.LEAK_DETECTED
+                : LeakDetected.LEAK_NOT_DETECTED
           }
         ]
       },
@@ -70,13 +89,19 @@ export default ({ Characteristic, Service }) => {
         supported: state => state.opened !== undefined,
         characteristics: [
           {
-            characteristic: Characteristic.ContactSensorState,
-            get: state => (state.opened ? 1 : 0)
+            characteristic: ContactSensorState,
+            get: state =>
+              state.opened
+                ? ContactSensorState.CONTACT_NOT_DETECTED
+                : ContactSensorState.CONTACT_DETECTED
           },
           {
-            characteristic: Characteristic.StatusTampered,
+            characteristic: StatusTampered,
             supported: state => state.tamper_detected !== undefined,
-            get: state => state.tamper_detected
+            get: state =>
+              state.tamper_detected
+                ? StatusTampered.TAMPERED
+                : StatusTampered.NOT_TAMPERED
           }
         ]
       },

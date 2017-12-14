@@ -71,7 +71,7 @@ Allows you to hide devices by their ID.
 
 #### `fan_ids`
 
-Allows you to expose binary switch devices as fans, instead of light bulbs.
+Allows you to expose devices (binary_switch/light_bulb) as fans, instead of light bulbs.
 
 ```json
 {
@@ -83,7 +83,7 @@ Allows you to expose binary switch devices as fans, instead of light bulbs.
 
 #### `outlet_ids`
 
-Allows you to expose binary switch devices as outlets, instead of light bulbs.
+Allows you to expose devices (binary_switch/light_bulb) as outlets, instead of light bulbs.
 
 ```json
 {
@@ -95,7 +95,7 @@ Allows you to expose binary switch devices as outlets, instead of light bulbs.
 
 #### `switch_ids`
 
-Allows you to expose binary switch devices as switches, instead of light bulbs.
+Allows you to expose devices (binary_switch/light_bulb) as switches, instead of light bulbs.
 
 ```json
 {

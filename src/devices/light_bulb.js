@@ -1,7 +1,16 @@
 const isFan = (state, device, config) =>
   config.fan_ids.indexOf(device.object_id) !== -1;
 
-const isLightBulb = (state, device, config) => !isFan(state, device, config);
+const isOutlet = (state, device, config) =>
+  config.outlet_ids.indexOf(device.object_id) !== -1;
+
+const isSwitch = (state, device, config) =>
+  config.switch_ids.indexOf(device.object_id) !== -1;
+
+const isLightBulb = (state, device, config) =>
+  !isFan(state, device, config) &&
+  !isOutlet(state, device, config) &&
+  !isSwitch(state, device, config);
 
 export default ({ Characteristic, Service }) => {
   return {
@@ -67,6 +76,37 @@ export default ({ Characteristic, Service }) => {
             supported: state => state.brightness !== undefined,
             get: state => Math.floor(state.brightness * 100),
             set: value => ({ brightness: value / 100 })
+          }
+        ]
+      },
+      {
+        service: Service.Outlet,
+        supported: isOutlet,
+        characteristics: [
+          {
+            characteristic: Characteristic.On,
+            get: state => state.powered,
+            set: value => ({ powered: !!value })
+          },
+          {
+            characteristic: Characteristic.OutletInUse,
+            get: state => state.powered
+          }
+        ]
+      },
+      {
+        service: Service.Switch,
+        supported: isSwitch,
+        characteristics: [
+          {
+            characteristic: Characteristic.On,
+            get: state => state.powered,
+            set: value => ({ powered: !!value })
+          },
+          {
+            characteristic: Characteristic.On,
+            get: state => state.opened,
+            set: value => ({ opened: !!value })
           }
         ]
       }

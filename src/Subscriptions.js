@@ -10,6 +10,7 @@ export default class Subscriptions extends EventEmitter {
   getOrAddSubscriber(subscribeKey) {
     if (!this.subscribers[subscribeKey]) {
       this.subscribers[subscribeKey] = new PubNub({
+        ssl:true,
         subscribeKey
       });
 

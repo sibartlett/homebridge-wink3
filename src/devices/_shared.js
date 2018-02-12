@@ -9,7 +9,7 @@ export const batteryService = options => {
 
   const service = {
     service: Service.BatteryService,
-    supported: state => state[field] !== undefined,
+    supported: state => state[field] !== undefined && state[field] !== null,
     characteristics: [
       {
         characteristic: Characteristic.BatteryLevel,

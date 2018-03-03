@@ -6,13 +6,16 @@ const isOutlet = (state, device, config) =>
   config.outlet_ids.indexOf(device.object_id) !== -1;
 
 const isSwitch = (state, device, config) =>
-  state.opened !== undefined ||
   config.switch_ids.indexOf(device.object_id) !== -1;
+
+const isValve = (state, device, config) =>
+  state.opened !== undefined;
 
 const isLightBulb = (state, device, config) =>
   !isFan(state, device, config) &&
   !isOutlet(state, device, config) &&
-  !isSwitch(state, device, config);
+  !isSwitch(state, device, config) &&
+  !isValve(state, device, config);
 
 export default ({ Characteristic, Service }) => {
   return {
@@ -63,15 +66,23 @@ export default ({ Characteristic, Service }) => {
         characteristics: [
           {
             characteristic: Characteristic.On,
-            supported: state => state.opened === undefined,
             get: state => state.powered,
             set: value => ({ powered: !!value })
-          },
+          }
+        ]
+      },
+      {
+        service: Service.Valve,
+        supported: isValve,
+        characteristics: [
           {
-            characteristic: Characteristic.On,
-            supported: state => state.opened !== undefined,
+            characteristic: Characteristic.Active,
             get: state => state.opened,
             set: value => ({ opened: !!value })
+          },
+          {
+            characteristic: Characteristic.InUse,
+            get: state => state.opened
           }
         ]
       }

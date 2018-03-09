@@ -87,6 +87,7 @@ _Light Bulbs and dimmable switches_
 
 * On/Off and Dimming.
 * Bulbs with support allow Hue and Saturation.
+* Bulbs with support allow Colour Temperature.
 * Can be added to HomeKit as a fan, using `fan_ids` optional configuration field
 
 ## Locks

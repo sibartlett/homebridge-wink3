@@ -33,6 +33,18 @@ export default ({ Characteristic, Service }) => {
             set: value => ({ brightness: value / 100 })
           },
           {
+            characteristic: Characteristic.ColorTemperature,
+            supported: state =>
+              state.color_temperature !== undefined &&
+              state.hue === undefined &&
+              state.saturation === undefined,
+            get: state => Math.floor(1000000 / state.color_temperature),
+            set: value => ({
+              color_model: "color_temperature",
+              color_temperature: 1000000 / value
+            })
+          },
+          {
             characteristic: Characteristic.Hue,
             supported: state => state.hue !== undefined,
             get: state => Math.floor(state.hue * 360),

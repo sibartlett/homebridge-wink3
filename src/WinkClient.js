@@ -29,7 +29,7 @@ export default class WinkClient {
     const accessToken = hub ? hub.access_token : this.config.access_token;
     const headers = {
       "User-Agent":
-        "Manufacturer/Apple-iPhone8_1 iOS/11.1.1 WinkiOS/6.5.1.0-production-release (Scale/2.00)"
+        "Manufacturer/Apple-iPhone10_1 iOS/11.2.6 WinkiOS/6.7.0.19-production-release (Scale/2.00)"
     };
 
     if (accessToken && options.uri !== "/oauth2/token") {
@@ -137,8 +137,9 @@ export default class WinkClient {
           server.close();
         } else {
           response.writeHead(302, {
-            Location: `https://api.wink.com/oauth2/authorize?response_type=code&client_id=${this
-              .config.client_id}&redirect_uri=${redirectUri}&state=${state}`
+            Location: `https://api.wink.com/oauth2/authorize?response_type=code&client_id=${
+              this.config.client_id
+            }&redirect_uri=${redirectUri}&state=${state}`
           });
           return response.end();
         }
@@ -295,8 +296,9 @@ export default class WinkClient {
 
   updateDevice(accessory, state) {
     this.log(
-      `Sending update: ${accessory.context.name} (${accessory.context
-        .object_type}/${accessory.context.object_id})`,
+      `Sending update: ${accessory.context.name} (${
+        accessory.context.object_type
+      }/${accessory.context.object_id})`,
       state
     );
 
@@ -304,8 +306,9 @@ export default class WinkClient {
 
     const remote = this.request({
       method: "PUT",
-      uri: `/${accessory.definition.group}/${accessory.context
-        .object_id}/desired_state`,
+      uri: `/${accessory.definition.group}/${
+        accessory.context.object_id
+      }/desired_state`,
       body: {
         desired_state: state,
         nonce: this.nonce
@@ -319,8 +322,9 @@ export default class WinkClient {
       const local = this.request(
         {
           method: "PUT",
-          uri: `/${accessory.definition.group}/${accessory.context
-            .local_id}/desired_state`,
+          uri: `/${accessory.definition.group}/${
+            accessory.context.local_id
+          }/desired_state`,
           body: {
             desired_state: state,
             nonce: this.nonce
@@ -331,8 +335,9 @@ export default class WinkClient {
         hub.authenticated = false;
         delete hub.access_token;
 
-        const hubName = `${hub.device.name}, ${hub.device.last_reading
-          .ip_address}`;
+        const hubName = `${hub.device.name}, ${
+          hub.device.last_reading.ip_address
+        }`;
 
         this.log(
           "warn",
@@ -347,8 +352,9 @@ export default class WinkClient {
 
     return Promise.race(requests).then(response => {
       this.log(
-        `Update sent successfully: ${accessory.context.name} (${accessory
-          .context.object_type}/${accessory.context.object_id})`
+        `Update sent successfully: ${accessory.context.name} (${
+          accessory.context.object_type
+        }/${accessory.context.object_id})`
       );
       return response;
     });

@@ -1,6 +1,6 @@
 {
   "name": "homebridge-wink3",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "description": "Homebridge plugin for wink.com",
   "homepage": "https://sibartlett.github.io/homebridge-wink3/",
   "repository": "git://github.com/sibartlett/homebridge-wink3",

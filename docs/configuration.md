@@ -105,6 +105,18 @@ Allows you to expose devices (binary_switch/light_bulb) as switches, instead of 
 }
 ```
 
+#### `leak_ids`
+
+Allows you to expose devices (sensor_pod) as leak sensors, instead of contact sensors.
+
+```json
+{
+  "leak_ids": [
+    248563
+  ]
+}
+```
+
 
 #### `direct_access`
 

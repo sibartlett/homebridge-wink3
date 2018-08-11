@@ -1,5 +1,11 @@
 const { batteryService } = require("./_shared");
 
+const isLeakSensor = (state, device, config) =>
+  config.leak_ids.indexOf(device.object_id) !== -1;
+
+const isNotLeakSensor = (state, device, config) =>
+  config.leak_ids.indexOf(device.object_id) === -1;
+
 module.exports = ({ Characteristic, Service }) => {
   const {
     ContactSensorState,
@@ -63,14 +69,21 @@ module.exports = ({ Characteristic, Service }) => {
       },
       {
         service: Service.LeakSensor,
-        supported: state => state.liquid_detected !== undefined,
+        supported: isLeakSensor,
         characteristics: [
           {
             characteristic: LeakDetected,
-            get: state =>
-              state.liquid_detected
-                ? LeakDetected.LEAK_DETECTED
-                : LeakDetected.LEAK_NOT_DETECTED
+            get: state => {
+              if (isLeakSensor) {
+                return state.opened
+                  ? LeakDetected.LEAK_DETECTED
+                  : LeakDetected.LEAK_NOT_DETECTED;
+              } else {
+                return state.liquid_detected
+                  ? LeakDetected.LEAK_DETECTED
+                  : LeakDetected.LEAK_NOT_DETECTED;
+              }
+            }
           }
         ]
       },
@@ -86,7 +99,7 @@ module.exports = ({ Characteristic, Service }) => {
       },
       {
         service: Service.ContactSensor,
-        supported: state => state.opened !== undefined,
+        supported: isNotLeakSensor,
         characteristics: [
           {
             characteristic: ContactSensorState,

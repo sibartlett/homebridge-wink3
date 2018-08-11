@@ -1,6 +1,9 @@
 const isFan = (state, device, config) =>
   config.fan_ids.indexOf(device.object_id) !== -1;
 
+const isVent = (state, device, config) =>
+  config.vent_ids.indexOf(device.object_id) !== -1;
+
 const isOutlet = (state, device, config) =>
   config.outlet_ids.indexOf(device.object_id) !== -1;
 
@@ -10,6 +13,7 @@ const isSwitch = (state, device, config) =>
 const isLightBulb = (state, device, config) =>
   !isFan(state, device, config) &&
   !isOutlet(state, device, config) &&
+  !isVent(state, device, config) &&
   !isSwitch(state, device, config);
 
 module.exports = ({ Characteristic, Service }) => {
@@ -17,6 +21,25 @@ module.exports = ({ Characteristic, Service }) => {
     type: "light_bulb",
     group: "light_bulbs",
     services: [
+      {
+        service: Service.WindowCovering,
+        supported: isVent,
+        characteristics: [
+          {
+            characteristic: Characteristic.TargetPosition,
+            get: (state, desired_state) => desired_state.brightness * 100,
+            set: value => ({ brightness: value / 100 })
+          },
+          {
+            characteristic: Characteristic.CurrentPosition,
+            get: state => state.brightness * 100
+          },
+          {
+            characteristic: Characteristic.PositionState,
+            value: Characteristic.PositionState.STOPPED
+          }
+        ]
+      },
       {
         service: Service.Lightbulb,
         supported: isLightBulb,

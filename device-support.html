@@ -1,0 +1,520 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Device Support · homebridge-wink3</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="configuration.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="getting-started/">
+            
+                <a href="getting-started/">
+            
+                    
+                    Getting Started
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="getting-started/register-with-wink.html">
+            
+                <a href="getting-started/register-with-wink.html">
+            
+                    
+                    Register with Wink
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="getting-started/install.html">
+            
+                <a href="getting-started/install.html">
+            
+                    
+                    Install
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="getting-started/authenticate.html">
+            
+                <a href="getting-started/authenticate.html">
+            
+                    
+                    Authenticate
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="configuration.html">
+            
+                <a href="configuration.html">
+            
+                    
+                    Configuration
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4" data-path="device-support.html">
+            
+                <a href="device-support.html">
+            
+                    
+                    Device Support
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Device Support</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="device-support">Device support</h1>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Device Type</th>
+<th>Device Group</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#air-conditioners">Air Conditioners</a></td>
+<td><code>air_conditioner</code></td>
+<td><code>air_conditioners</code></td>
+</tr>
+<tr>
+<td><a href="#binary-switches">Binary Switches</a></td>
+<td><code>binary_switch</code></td>
+<td><code>binary_switches</code></td>
+</tr>
+<tr>
+<td><a href="#cameras">Cameras</a></td>
+<td><code>camera</code></td>
+<td><code>cameras</code></td>
+</tr>
+<tr>
+<td><a href="#door-bells">Door Bells</a></td>
+<td><code>door_bell</code></td>
+<td><code>door_bells</code></td>
+</tr>
+<tr>
+<td><a href="#fans">Fans</a></td>
+<td><code>fan</code></td>
+<td><code>fans</code></td>
+</tr>
+<tr>
+<td><a href="#garage-doors">Garage Doors</a></td>
+<td><code>garage_door</code></td>
+<td><code>garage_doors</code></td>
+</tr>
+<tr>
+<td><a href="#light-bulbs">Light Bulbs</a></td>
+<td><code>light_bulb</code></td>
+<td><code>light_bulbs</code></td>
+</tr>
+<tr>
+<td><a href="#locks">Locks</a></td>
+<td><code>lock</code></td>
+<td><code>locks</code></td>
+</tr>
+<tr>
+<td><a href="#propane-tanks">Propane Tanks</a></td>
+<td><code>propane_tank</code></td>
+<td><code>propane_tanks</code></td>
+</tr>
+<tr>
+<td><a href="#sensors">Sensors</a></td>
+<td><code>sensor_pod</code></td>
+<td><code>sensor_pods</code></td>
+</tr>
+<tr>
+<td><a href="#shades">Shades</a></td>
+<td><code>shade</code></td>
+<td><code>shades</code></td>
+</tr>
+<tr>
+<td><a href="#sirens">Sirens</a></td>
+<td><code>siren</code></td>
+<td><code>sirens</code></td>
+</tr>
+<tr>
+<td><a href="#smoke-detectors">Smoke Detectors</a></td>
+<td><code>smoke_detector</code></td>
+<td><code>smoke_detectors</code></td>
+</tr>
+<tr>
+<td><a href="#thermostats">Thermostats</a></td>
+<td><code>thermostat</code></td>
+<td><code>thermostats</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="air-conditioners">Air Conditioners</h2>
+<p><em>Wink Aros</em></p>
+<ul>
+<li>Change between cool, auto and off.</li>
+<li>Set temperature.</li>
+</ul>
+<p>Limitations:</p>
+<ul>
+<li>Direct fan control is not yet available.</li>
+</ul>
+<h2 id="binary-switches">Binary Switches</h2>
+<p><em>Z-Wave non-dimming switches, Wink Outlink, Wink Relay</em></p>
+<ul>
+<li>On/Off Functions.</li>
+<li>For the Outlink, uses the power usage to determine if on or off.</li>
+<li>Can be added to HomeKit as a fan, using <code>fan_ids</code> optional configuration field</li>
+</ul>
+<p>Limitations:</p>
+<ul>
+<li>Does not report actual power usage due to limitation in HomeKit Interface.</li>
+</ul>
+<h2 id="cameras">Cameras</h2>
+<p><em>Arlo, Canary, Nest Cam</em></p>
+<ul>
+<li>Added to HomeKit as motion detector.</li>
+<li>Canary is added to HomeKit as security system:<ul>
+<li>Allows user to set the operating mode (armed, disarmed, etc).</li>
+</ul>
+</li>
+</ul>
+<p>Limitations:</p>
+<ul>
+<li>Can not view video feed.</li>
+<li>Cameras other than Canary are not added as a security system (as I&apos;m not sure which modes each camera supports and how they map to HomeKit states).</li>
+</ul>
+<h2 id="door-bells">Door Bells</h2>
+<p><em>Ring</em></p>
+<ul>
+<li>Added to HomeKit as motion detector.</li>
+</ul>
+<h2 id="fans">Fans</h2>
+<p><em>Home Decorators Collection fans</em></p>
+<ul>
+<li>On/Off, rotation direction and speed.</li>
+</ul>
+<p>Limitations:</p>
+<ul>
+<li>Can not control Comfort Breeze / auto mode.</li>
+</ul>
+<h2 id="garage-doors">Garage Doors</h2>
+<ul>
+<li>Open/Close Wink-connected garage doors.</li>
+<li>Reports Battery Level (where available).</li>
+</ul>
+<p>Limitations:</p>
+<ul>
+<li>Does not identify blocked doors due to limitation in Wink Interface.</li>
+<li>Chamberlain garage openers are only controllable when using a Client ID and Secret obtained from one of the official Wink apps. (<a href="https://github.com/python-wink/python-wink/issues/23#issuecomment-197431701" target="_blank">Source</a>)</li>
+</ul>
+<p>Chamberlain now offer official HomeKit support using the <a href="https://www.chamberlain.com/apple-partnership" target="_blank">MyQ&#xAE; Home Bridge</a>.</p>
+<h2 id="light-bulbs">Light Bulbs</h2>
+<p><em>Light Bulbs and dimmable switches</em></p>
+<ul>
+<li>On/Off and Dimming.</li>
+<li>Bulbs with support allow Hue and Saturation.</li>
+<li>Bulbs with support allow Colour Temperature.</li>
+<li>Can be added to HomeKit as a fan, using <code>fan_ids</code> optional configuration field</li>
+</ul>
+<h2 id="locks">Locks</h2>
+<ul>
+<li>Lock/Unlock and report current status.</li>
+<li>Reports Battery Level (where available).</li>
+</ul>
+<p>Limitations:</p>
+<ul>
+<li>Does not support tamper detection due to limitation in developer&apos;s locks and/or Wink API.</li>
+</ul>
+<h2 id="propane-tank">Propane Tank</h2>
+<ul>
+<li>Reports as a battery</li>
+</ul>
+<h2 id="sensors">Sensors</h2>
+<p><em>Spotter, Tripper and other PIR and Door/Window Sensors</em></p>
+<ul>
+<li>The following sensors are supported:<ul>
+<li>Door and Window sensors</li>
+<li>Humidity sensor</li>
+<li>Motion sensor (PIR reports as Motion Detector)</li>
+<li>Occupancy sensor</li>
+<li>Temperature sensor</li>
+<li>Water sensor (leak detector)</li>
+</ul>
+</li>
+<li>Reports Battery Level (where available).</li>
+</ul>
+<p>Limitations:</p>
+<ul>
+<li>Spotter does not report brightness, vibration or loudness to HomeKit. Apple expects values and these are simply reported as yes/no concerning if it changed.</li>
+</ul>
+<h2 id="shades">Shades</h2>
+<ul>
+<li>Open and close.</li>
+<li>Reports Battery Level (where available).</li>
+</ul>
+<h2 id="siren">Siren</h2>
+<p><em>GoControl Siren</em></p>
+<ul>
+<li>Enable/disable siren and strobe independently of each other.</li>
+</ul>
+<h2 id="smoke-detectors">Smoke Detectors</h2>
+<ul>
+<li>Reports CO and Smoke Alarms as available by the detector</li>
+<li>Reports Battery Level.</li>
+</ul>
+<p>Limitations:</p>
+<ul>
+<li>Only Kiddie detectors are supported?</li>
+</ul>
+<h2 id="thermostats">Thermostats</h2>
+<ul>
+<li>Should be fully functional.</li>
+<li>Reports Battery Level (where available).</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="configuration.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Configuration">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Device Support","level":"1.4","depth":1,"previous":{"title":"Configuration","level":"1.3","depth":1,"path":"configuration.md","ref":"configuration.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","github"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/sibartlett/homebridge-wink3/edit/master/docs"},"github":{"url":"https://github.com/sibartlett/homebridge-wink3"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"homebridge-wink3","gitbook":"*"},"file":{"path":"device-support.md","mtime":"2018-08-14T01:39:25.126Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-14T04:38:42.540Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,6 +1,6 @@
-import _ from "lodash";
+const _ = require("lodash");
 
-export default class Accessories {
+module.exports = class Accessories {
   constructor() {
     this.comparator = this.comparator.bind(this);
     this._accessories = {};
@@ -63,4 +63,4 @@ export default class Accessories {
       this.getAccessoryKey(accessory1) === this.getAccessoryKey(accessory2)
     );
   }
-}
+};

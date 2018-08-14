@@ -1,6 +1,6 @@
-import Joi from "joi";
+const Joi = require("joi");
 
-export default Joi.object()
+module.exports = Joi.object()
   .keys({
     platform: Joi.string().required(),
     name: Joi.string().required(),

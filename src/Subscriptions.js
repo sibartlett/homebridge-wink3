@@ -1,7 +1,7 @@
-import EventEmitter from "events";
-import PubNub from "pubnub";
+const EventEmitter = require("events");
+const PubNub = require("pubnub");
 
-export default class Subscriptions extends EventEmitter {
+module.exports = class Subscriptions extends EventEmitter {
   constructor() {
     super();
     this.subscribers = {};
@@ -10,7 +10,7 @@ export default class Subscriptions extends EventEmitter {
   getOrAddSubscriber(subscribeKey) {
     if (!this.subscribers[subscribeKey]) {
       this.subscribers[subscribeKey] = new PubNub({
-        ssl:true,
+        ssl: true,
         subscribeKey
       });
 
@@ -39,9 +39,10 @@ export default class Subscriptions extends EventEmitter {
   }
 
   onMessage(message) {
-    const msg = typeof message.message !== "string"
-      ? message.message
-      : JSON.parse(message.message);
+    const msg =
+      typeof message.message !== "string"
+        ? message.message
+        : JSON.parse(message.message);
 
     this.emit("message", msg);
 
@@ -61,4 +62,4 @@ export default class Subscriptions extends EventEmitter {
 
     this.emit("unknown-message", msg);
   }
-}
+};

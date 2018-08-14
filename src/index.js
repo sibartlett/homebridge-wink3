@@ -1,8 +1,6 @@
-import sourceMapSupport from "source-map-support";
-import WinkPlatform, { pluginName, platformName } from "./WinkPlatform";
+const { pluginName, platformName } = require("./constants");
+const WinkPlatform = require("./WinkPlatform");
 
-sourceMapSupport.install();
-
-export default homebridge => {
+module.exports = homebridge => {
   homebridge.registerPlatform(pluginName, platformName, WinkPlatform, true);
 };

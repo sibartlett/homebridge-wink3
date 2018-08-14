@@ -1,4 +1,4 @@
-import _ from "lodash";
+const _ = require("lodash");
 
 class Debouncer {
   constructor(options) {
@@ -45,7 +45,10 @@ class Debouncer {
 
       data.timeout = setTimeout(() => {
         delete this.keys[key];
-        this.func.apply(undefined, args).then(resolve).catch(reject);
+        this.func
+          .apply(undefined, args)
+          .then(resolve)
+          .catch(reject);
       }, this.wait);
 
       data.prevArgs = args;
@@ -54,7 +57,7 @@ class Debouncer {
   }
 }
 
-export default options => {
+module.exports = options => {
   const debouncer = new Debouncer(options);
   return debouncer.call.bind(debouncer);
 };

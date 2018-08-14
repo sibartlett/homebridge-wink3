@@ -1,12 +1,12 @@
-import fs from "fs";
-import http from "http";
-import path from "path";
-import url from "url";
-import ip from "ip";
-import request from "request-promise-native";
-import debounce from "./debounce";
+const fs = require("fs");
+const http = require("http");
+const path = require("path");
+const url = require("url");
+const ip = require("ip");
+const request = require("request-promise-native");
+const debounce = require("./debounce");
 
-export default class WinkClient {
+module.exports = class WinkClient {
   constructor({ config, log, updateConfig }) {
     this.config = config;
     this.log = log;
@@ -359,4 +359,4 @@ export default class WinkClient {
       return response;
     });
   }
-}
+};

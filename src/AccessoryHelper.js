@@ -1,4 +1,4 @@
-export default class AccessoryHelper {
+module.exports = class AccessoryHelper {
   constructor(options) {
     this.config = options.config;
     this.definitions = options.definitions;
@@ -124,8 +124,9 @@ export default class AccessoryHelper {
       })
       .catch(e => {
         this.log.error(
-          `Failed to update device: ${accessory.context.name} (${accessory
-            .context.object_type}/${accessory.context.object_id})`,
+          `Failed to update device: ${accessory.context.name} (${
+            accessory.context.object_type
+          }/${accessory.context.object_id})`,
           e
         );
         callback(e);
@@ -160,4 +161,4 @@ export default class AccessoryHelper {
       });
     });
   }
-}
+};

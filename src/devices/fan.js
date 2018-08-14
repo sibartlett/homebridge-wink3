@@ -1,4 +1,4 @@
-export default ({ Characteristic, Service }) => {
+module.exports = ({ Characteristic, Service }) => {
   return {
     type: "fan",
     group: "fans",

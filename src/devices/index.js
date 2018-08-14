@@ -1,6 +1,6 @@
-import requireAll from "require-all";
+const requireAll = require("require-all");
 
-export default options => {
+module.exports = options => {
   return requireAll({
     dirname: __dirname,
     filter: filename =>

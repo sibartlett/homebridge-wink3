@@ -12,7 +12,7 @@ const isLightBulb = (state, device, config) =>
   !isOutlet(state, device, config) &&
   !isSwitch(state, device, config);
 
-export default ({ Characteristic, Service }) => {
+module.exports = ({ Characteristic, Service }) => {
   return {
     type: "light_bulb",
     group: "light_bulbs",

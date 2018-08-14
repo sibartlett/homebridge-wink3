@@ -1,4 +1,4 @@
-export const batteryService = options => {
+module.exports.batteryService = options => {
   const {
     Characteristic,
     Service,

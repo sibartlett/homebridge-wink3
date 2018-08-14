@@ -1,6 +1,6 @@
-import { batteryService } from "./_shared";
+const { batteryService } = require("./_shared");
 
-export default ({ Characteristic, Service }) => {
+module.exports = ({ Characteristic, Service }) => {
   return {
     type: "propane_tank",
     group: "propane_tanks",

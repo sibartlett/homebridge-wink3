@@ -1,22 +1,20 @@
-import childProcess from "child_process";
-import fs from "fs";
+const childProcess = require("child_process");
+const fs = require("fs");
 
-import _ from "lodash";
-import compareVersions from "compare-versions";
-import Joi from "joi";
+const _ = require("lodash");
+const compareVersions = require("compare-versions");
+const Joi = require("joi");
 
-import Accessories from "./Accessories";
-import AccessoryHelper from "./AccessoryHelper";
-import configSchema from "./configSchema";
-import devices from "./devices";
-import Subscriptions from "./Subscriptions";
-import WinkClient from "./WinkClient";
-import pkg from "../package.json";
+const Accessories = require("./Accessories");
+const AccessoryHelper = require("./AccessoryHelper");
+const configSchema = require("./configSchema");
+const devices = require("./devices");
+const { pluginName, platformName } = require("./constants");
+const Subscriptions = require("./Subscriptions");
+const WinkClient = require("./WinkClient");
+const pkg = require("../package.json");
 
-export const pluginName = "homebridge-wink";
-export const platformName = "Wink";
-
-export default class WinkPlatform {
+module.exports = class WinkPlatform {
   constructor(log, config, api) {
     if (!config) {
       log("Plugin not configured.");
@@ -293,4 +291,4 @@ export default class WinkPlatform {
       );
     }
   }
-}
+};

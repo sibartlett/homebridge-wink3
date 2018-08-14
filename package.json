@@ -13,7 +13,7 @@
     "wink"
   ],
   "engines": {
-    "node": ">=6.0.0",
+    "node": ">=8.9.0",
     "homebridge": ">=0.4.38"
   },
   "scripts": {

@@ -14,7 +14,7 @@ Yet another Wink plugin for [homebridge](https://github.com/nfarina/homebridge).
 
 * Uses Wink API v2, and local control.
 * Subscribes to Wink push notifications, instead of polling for device updates.
-* Written in ES7 (arrow functions, async/await, classes).
+* Written in ES2018 (arrow functions, async/await, classes, etc).
 * Accessory services and characteristics are defined declaratively.
 * Supports API tokens obtained from [developer.wink.com](https://developer.wink.com)
 

@@ -8,7 +8,7 @@ const isOutlet = (state, device, config) =>
 const isSwitch = (state, device, config) =>
   config.switch_ids.indexOf(device.object_id) !== -1;
 
-const isValve = (state, device, config) => state.opened !== undefined;
+const isValve = state => state.opened !== undefined;
 
 const isLightBulb = (state, device, config) =>
   !isFan(state, device, config) &&

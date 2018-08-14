@@ -1,3 +1,6 @@
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/sibartlett/homebridge-wink3.svg)](https://greenkeeper.io/)
+
 ![Wink and HomeKit](https://i.imgur.com/JGy2QiM.png)
 
 **homebridge-wink3**

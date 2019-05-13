@@ -7,34 +7,41 @@ module.exports = class Subscriptions extends EventEmitter {
     this.subscribers = {};
   }
 
-  getOrAddSubscriber(subscribeKey) {
-    if (!this.subscribers[subscribeKey]) {
-      this.subscribers[subscribeKey] = new PubNub({
+  getOrAddSubscriber(origin, subscribeKey) {
+    const key = `${origin}:${subscribeKey}`;
+
+    if (!this.subscribers[key]) {
+      this.subscribers[key] = new PubNub({
+        origin,
         ssl: true,
         subscribeKey
       });
 
-      this.subscribers[subscribeKey].addListener({
+      this.subscribers[key].addListener({
         message: this.onMessage.bind(this)
       });
     }
 
-    return this.subscribers[subscribeKey];
+    return this.subscribers[key];
   }
 
   subscribe(subscription) {
-    const { pubnub } = subscription;
-    const subscriber = this.getOrAddSubscriber(pubnub.subscribe_key);
+    const {
+      pubnub: { channel, origin, subscribe_key }
+    } = subscription;
+    const subscriber = this.getOrAddSubscriber(origin, subscribe_key);
     subscriber.subscribe({
-      channels: [pubnub.channel]
+      channels: [channel]
     });
   }
 
   unsubscribe(subscription) {
-    const { pubnub } = subscription;
-    const subscriber = this.getOrAddSubscriber(pubnub.subscribe_key);
+    const {
+      pubnub: { channel, origin, subscribe_key }
+    } = subscription;
+    const subscriber = this.getOrAddSubscriber(origin, subscribe_key);
     subscriber.unsubscribe({
-      channels: [pubnub.channel]
+      channels: [channel]
     });
   }
 

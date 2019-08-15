@@ -1,0 +1,46 @@
+{
+    "plugin_alias": "Wink",
+    "schema": {
+        "type": "object",
+        "properties": {
+            "platform": {
+                "title": "Platform",
+                "type": "string",
+                "const": "Wink",
+                "readOnly": true
+            },
+            "name": {
+                "title": "Name",
+                "type": "string",
+                "const": "Wink",
+                "required": true
+            },
+            "client_id": {
+                "title": "Wink Client ID",
+                "type": "string",
+                "required": true,
+                "options": {
+                    "hidden": true
+                }
+            },
+            "client_secret": {
+                "title": "Wink Client Secret",
+                "type": "string",
+                "required": true,
+                "options": {
+                    "hidden": true
+                }
+            },
+            "access_token": {
+                "title": "Access Token",
+                "type": "string",
+                "readOnly": true
+            },
+            "refresh_token": {
+                "title": "Refresh Token",
+                "type": "string",
+                "readOnly": true
+            }
+        }
+    }
+}

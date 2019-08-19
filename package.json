@@ -1,9 +1,8 @@
 {
-  "name": "homebridge-wink3",
+  "name": "@hoobs/wink",
   "version": "2.1.0",
-  "description": "Homebridge plugin for wink.com",
-  "homepage": "https://sibartlett.github.io/homebridge-wink3/",
-  "repository": "git://github.com/sibartlett/homebridge-wink3",
+  "description": "Wink integration for HOOBS",
+  "repository": "git://github.com/hoobs-org/homebridge-wink",
   "author": "Simon Bartlett <simon@sibartlett.com>",
   "license": "ISC",
   "main": "src/index.js",
@@ -16,39 +15,14 @@
     "node": ">=8.9.0",
     "homebridge": ">=0.4.38"
   },
-  "scripts": {
-    "dropcache": "rm /usr/local/lib/node_modules/homebridge/node_modules/node-persist/storage/accessories/cachedAccessories",
-    "test": "eslint .",
-    "prettier": "prettier --write src/**/*.js",
-    "start": "homebridge -D -P . -U ."
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.js": [
-      "prettier --write",
-      "git add"
-    ]
-  },
   "dependencies": {
-    "compare-versions": "^3.4.0",
+    "@hapi/joi": "^15.1.1",
+    "@hoobs/pubnub": "^4.25.0",
+    "compare-versions": "^3.5.1",
     "ip": "^1.1.5",
-    "joi": "^14.3.1",
-    "lodash": "^4.17.11",
-    "pubnub": "^4.24.0",
+    "lodash": "^4.17.15",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.7",
     "require-all": "^3.0.0"
-  },
-  "devDependencies": {
-    "eslint": "^5.16.0",
-    "eslint-config-prettier": "^4.2.0",
-    "eslint-plugin-prettier": "^3.1.0",
-    "husky": "^2.2.0",
-    "lint-staged": "^8.1.6",
-    "prettier": "^1.17.1"
   }
 }

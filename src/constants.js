@@ -1,4 +1,4 @@
 module.exports = {
-  pluginName: "homebridge-wink",
+  pluginName: "wink",
   platformName: "Wink"
 };

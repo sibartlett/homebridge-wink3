@@ -8,7 +8,11 @@
   "main": "src/index.js",
   "preferGlobal": true,
   "keywords": [
-    "homebridge-plugin",
+    "hoobs-certified",
+    "category_climate",
+    "category_hubs",
+    "category_lighting",
+    "hoobs-plugin",
     "wink"
   ],
   "engines": {

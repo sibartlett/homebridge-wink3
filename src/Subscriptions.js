@@ -1,5 +1,5 @@
 const EventEmitter = require("events");
-const PubNub = require("pubnub");
+const PubNub = require("@hoobs/pubnub");
 
 module.exports = class Subscriptions extends EventEmitter {
   constructor() {

@@ -1,12 +1,11 @@
 {
   "name": "@hoobs/wink",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Wink integration for HOOBS",
   "repository": "git://github.com/hoobs-org/homebridge-wink",
   "author": "Simon Bartlett <simon@sibartlett.com>",
   "license": "ISC",
   "main": "src/index.js",
-  "preferGlobal": true,
   "keywords": [
     "hoobs-certified",
     "category_climate",

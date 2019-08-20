@@ -5,7 +5,7 @@ const url = require("url");
 const ip = require("ip");
 const request = require("request-promise-native");
 const debounce = require("./debounce");
-const credentials = request("./credentials");
+const credentials = require("./access.js");
 
 module.exports = class WinkClient {
   constructor({ config, log, updateConfig }) {

@@ -1,6 +1,6 @@
 {
   "name": "@hoobs/wink",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "Wink integration for HOOBS",
   "repository": "git://github.com/hoobs-org/homebridge-wink",
   "author": "Simon Bartlett <simon@sibartlett.com>",

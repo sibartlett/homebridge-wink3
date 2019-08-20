@@ -3,7 +3,7 @@ const fs = require("fs");
 
 const _ = require("lodash");
 const compareVersions = require("compare-versions");
-const Joi = require("joi");
+const Joi = require("@hapi/joi");
 
 const Accessories = require("./Accessories");
 const AccessoryHelper = require("./AccessoryHelper");

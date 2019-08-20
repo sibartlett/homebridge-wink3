@@ -15,16 +15,13 @@
                 "const": "Wink",
                 "required": true
             },
-            "client_id": {
-                "title": "Wink Client ID",
+            "username": {
+                "title": "Wink Username",
                 "type": "string",
-                "required": true,
-                "options": {
-                    "hidden": true
-                }
+                "required": true
             },
-            "client_secret": {
-                "title": "Wink Client Secret",
+            "password": {
+                "title": "Wink Password",
                 "type": "string",
                 "required": true,
                 "options": {

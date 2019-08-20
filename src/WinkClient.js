@@ -5,6 +5,7 @@ const url = require("url");
 const ip = require("ip");
 const request = require("request-promise-native");
 const debounce = require("./debounce");
+const credentials = request("./credentials");
 
 module.exports = class WinkClient {
   constructor({ config, log, updateConfig }) {
@@ -75,8 +76,8 @@ module.exports = class WinkClient {
     this.log("Refreshing access token...");
     return this.getToken({
       grant_type: "refresh_token",
-      client_id: this.config.client_id,
-      client_secret: this.config.client_secret,
+      client_id: credentials.id,
+      client_secret: credentials.secret,
       refresh_token: this.config.refresh_token
     })
       .then(response => {
@@ -104,8 +105,8 @@ module.exports = class WinkClient {
       if (this.config.username && this.config.password) {
         return resolve({
           grant_type: "password",
-          client_id: this.config.client_id,
-          client_secret: this.config.client_secret,
+          client_id: credentials.id,
+          client_secret: credentials.secret,
           username: this.config.username,
           password: this.config.password
         });
@@ -125,7 +126,7 @@ module.exports = class WinkClient {
         if (query.code && query.state === state) {
           resolve({
             grant_type: "code",
-            client_secret: this.config.client_secret,
+            client_secret: credentials.secret,
             code: query.code
           });
 
@@ -138,7 +139,7 @@ module.exports = class WinkClient {
         } else {
           response.writeHead(302, {
             Location: `https://api.wink.com/oauth2/authorize?response_type=code&client_id=${
-              this.config.client_id
+              credentials.id
             }&redirect_uri=${redirectUri}&state=${state}`
           });
           return response.end();
@@ -270,8 +271,8 @@ module.exports = class WinkClient {
           scope: "local_control",
           grant_type: "refresh_token",
           refresh_token: this.config.refresh_token,
-          client_id: this.config.client_id,
-          client_secret: this.config.client_secret
+          client_id: credentials.id,
+          client_secret: credentials.secret
         }
       });
 

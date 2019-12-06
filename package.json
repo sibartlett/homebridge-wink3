@@ -1,31 +1,31 @@
 {
-  "name": "@hoobs/wink",
-  "version": "2.1.6",
-  "description": "Wink integration for HOOBS",
-  "repository": "git://github.com/hoobs-org/homebridge-wink",
-  "author": "Simon Bartlett <simon@sibartlett.com>",
-  "license": "ISC",
-  "main": "src/index.js",
-  "keywords": [
-    "hoobs-certified",
-    "category_climate",
-    "category_hubs",
-    "category_lighting",
-    "hoobs-plugin",
-    "wink"
-  ],
-  "engines": {
-    "node": ">=8.9.0",
-    "homebridge": ">=0.4.38"
-  },
-  "dependencies": {
-    "@hapi/joi": "^15.1.1",
-    "@hoobs/pubnub": "^4.25.0",
-    "compare-versions": "^3.5.1",
-    "ip": "^1.1.5",
-    "lodash": "^4.17.15",
-    "request": "^2.88.0",
-    "request-promise-native": "^1.0.7",
-    "require-all": "^3.0.0"
-  }
+    "name": "@hoobs/wink",
+    "version": "2.1.7",
+    "description": "Wink integration for HOOBS",
+    "repository": "git://github.com/hoobs-org/homebridge-wink",
+    "author": "Simon Bartlett <simon@sibartlett.com>",
+    "license": "ISC",
+    "main": "src/index.js",
+    "keywords": [
+        "hoobs-certified",
+        "category_climate",
+        "category_hubs",
+        "category_lighting",
+        "hoobs-plugin",
+        "wink"
+    ],
+    "engines": {
+        "node": ">=8.9.0",
+        "homebridge": ">=0.4.38"
+    },
+    "dependencies": {
+        "@hapi/joi": "^15.1.1",
+        "@hoobs/pubnub": "^4.25.1",
+        "compare-versions": "^3.5.1",
+        "ip": "^1.1.5",
+        "lodash": "^4.17.15",
+        "request": "^2.88.0",
+        "request-promise-native": "^1.0.7",
+        "require-all": "^3.0.0"
+    }
 }

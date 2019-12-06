@@ -5,7 +5,6 @@ const url = require("url");
 const ip = require("ip");
 const request = require("request-promise-native");
 const debounce = require("./debounce");
-const credentials = require("./access.js");
 
 module.exports = class WinkClient {
   constructor({ config, log, updateConfig }) {
@@ -74,14 +73,10 @@ module.exports = class WinkClient {
 
   refreshToken() {
     this.log("Refreshing access token...");
-
-    let buff_1 = new Buffer(credentials.id, "base64");
-    let buff_2 = new Buffer(credentials.secret, "base64");
-
     return this.getToken({
       grant_type: "refresh_token",
-      client_id: buff_1.toString("ascii"),
-      client_secret: buff_2.toString("ascii"),
+      client_id: this.config.client_id,
+      client_secret: this.config.client_secret,
       refresh_token: this.config.refresh_token
     })
       .then(response => {
@@ -106,14 +101,11 @@ module.exports = class WinkClient {
 
   getOauthGrant() {
     return new Promise(resolve => {
-      let buff_1 = new Buffer(credentials.id, "base64");
-      let buff_2 = new Buffer(credentials.secret, "base64");
-
       if (this.config.username && this.config.password) {
         return resolve({
           grant_type: "password",
-          client_id: buff_1.toString("ascii"),
-          client_secret: buff_2.toString("ascii"),
+          client_id: this.config.client_id,
+          client_secret: this.config.client_secret,
           username: this.config.username,
           password: this.config.password
         });
@@ -133,7 +125,7 @@ module.exports = class WinkClient {
         if (query.code && query.state === state) {
           resolve({
             grant_type: "code",
-            client_secret: buff_2.toString("ascii"),
+            client_secret: this.config.client_secret,
             code: query.code
           });
 
@@ -145,7 +137,9 @@ module.exports = class WinkClient {
           server.close();
         } else {
           response.writeHead(302, {
-            Location: `https://api.wink.com/oauth2/authorize?response_type=code&client_id=${buff_1.toString("ascii")}&redirect_uri=${redirectUri}&state=${state}`
+            Location: `https://api.wink.com/oauth2/authorize?response_type=code&client_id=${
+              this.config.client_id
+            }&redirect_uri=${redirectUri}&state=${state}`
           });
           return response.end();
         }
@@ -268,9 +262,6 @@ module.exports = class WinkClient {
     let authenticated = false;
 
     try {
-      let buff_1 = new Buffer(credentials.id, "base64");
-      let buff_2 = new Buffer(credentials.secret, "base64");
-
       const response = await this.request({
         method: "POST",
         uri: "/oauth2/token",
@@ -279,8 +270,8 @@ module.exports = class WinkClient {
           scope: "local_control",
           grant_type: "refresh_token",
           refresh_token: this.config.refresh_token,
-          client_id: buff_1.toString("ascii"),
-          client_secret: buff_2.toString("ascii")
+          client_id: this.config.client_id,
+          client_secret: this.config.client_secret
         }
       });
 

@@ -1,3 +1,5 @@
+**IMPORTANT!** This project is no longer being maintained, as I no longer use Wink. This plugin should still function as long as Wink supports their exisitng API.
+
 ![Wink and HomeKit](https://i.imgur.com/JGy2QiM.png)
 
 **homebridge-wink3**

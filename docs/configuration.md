@@ -105,6 +105,17 @@ Allows you to expose devices (binary_switch/light_bulb) as switches, instead of 
 }
 ```
 
+#### `vent_ids`
+
+Allows you to expose devices (binary_switch/light_bulb) as vents (currently window coverings until HomeKit supports vents), instead of light bulbs.
+
+```json
+{
+  "vent_ids": [
+    248563
+  ]
+}
+```
 
 #### `direct_access`
 

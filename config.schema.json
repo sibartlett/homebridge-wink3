@@ -1,0 +1,175 @@
+{
+    "pluginAlias": "Wink",
+    "pluginType": "platform",
+    "singular": true,
+    "headerDisplay": " For Detailed instructions go [here](https://sibartlett.github.io/homebridge-wink3/)",
+    "footerDisplay": "This plugin is no longer being maintained but should work.",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string",
+          "default": "Wink",
+          "required": true
+        },
+        "client_id": {
+          "title": "Client ID",
+          "type": "string",
+          "required": true
+        },
+        "client_secret": {
+          "title": "Client Secret",
+          "type": "string",
+          "required": true
+        },
+        "hide_groups": {
+          "type": "array",
+          "required": false,
+          "expandable": true,
+          "expanded": false,
+          "uniqueItems": true,
+          "items": {
+            "title": "Type",
+            "type": "string",
+            "enum": [
+              "air_conditioner",
+              "binary_switch",
+              "camera",
+              "door_bell",
+              "fan",
+              "garage_door",
+              "light_bulb",
+              "lock",
+              "propane_tank",
+              "sensor_pod",
+              "shade",
+              "siren",
+              "smoke_detector",
+              "thermostat"
+            ]
+          }
+        },
+        "hide_ids": {
+          "title": "Hide IDs",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "integer"
+          }
+        },
+        "fan_ids": {
+          "title": "Fan IDs",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "integer"
+          }
+        },
+        "outlet_ids": {
+          "title": "Outlet IDs",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "integer"
+          }
+        },
+        "switch_ids": {
+          "title": "Switch IDs",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "integer"
+          }
+        },
+        "direct_access": {
+          "title": " Enable/disable local control.",
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "layout": [
+     "name",
+      {
+        "type": "help",
+        "helpvalue": "<em class='primary-text'>Enter the Client ID and Client Secret obtained from <a target='_blank' href='https://developer.wink.com/'>developer.wink.com</a></em>:"
+      },
+      {
+        "type": "flex",
+        "flex-flow": "row wrap",
+        "items": [
+          {
+            "type": "flex",
+            "flex-flow": "column",
+            "items": [
+              "client_id"
+            ]
+          },
+          {
+            "type": "flex",
+            "flex-flow": "column",
+            "items": [
+              "client_secret"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "fieldset",
+        "title": "Optional Settings",
+        "expandable": true,
+        "expanded": false,
+        "items": [
+          {
+            "key": "hide_groups",
+            "title": "Hidden Groups <p class='help-block'>Allows you to hide groups of devices.</p>",  
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "notitle": true,
+            "description": "Hidden Devices <p class='help-block'>Allows you to hide devices by their ID.</p>",
+            "key": "hide_ids",
+            "title": "Hidden ID",
+            "items": {
+              "type": "number",
+              "placeholder": "Enter device id..."
+            }
+          },
+          {
+            "notitle": true,
+            "description": "Fan Devices <p class='help-block'>Allows you to expose devices (binary_switch/light_bulb) as fans, instead of light bulbs.</p>",
+            "key": "fan_ids",
+            "title": "Fan ID",
+            "items": {
+              "type": "number",
+              "placeholder": "Enter device id..."
+            }
+          },
+          {
+            "notitle": true,
+            "description": "Outlet Devices <p class='help-block'>Allows you to expose devices (binary_switch/light_bulb) as outlets, instead of light bulbs.</p>",
+            "key": "outlet_ids",
+            "title": "Outlet ID",
+            "items": {
+              "type": "number",
+              "placeholder": "Enter device id..."
+            }
+          },
+          {
+            "notitle": true,
+            "description": "Switch Devices <p class='help-block'>Allows you to expose devices (binary_switch/light_bulb) as switches, instead of light bulbs.</p>",
+            "key": "switch_ids",
+            "title": "Switch ID",
+            "items": {
+              "type": "number",
+              "placeholder": "Enter device id..."
+            }
+          },
+          "direct_access"
+        ]
+      }
+    ]
+  }

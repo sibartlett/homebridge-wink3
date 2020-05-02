@@ -2,3 +2,5 @@ _book
 dist
 node_modules
 config.json
+
+.DS_Store

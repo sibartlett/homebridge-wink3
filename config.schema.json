@@ -2,8 +2,8 @@
     "pluginAlias": "Wink",
     "pluginType": "platform",
     "singular": true,
-    "headerDisplay": "Optional content to display above the plugin config. Supports markdown.",
-    "footerDisplay": "Optional content to display below the plugin config. Supports markdown.",
+    "headerDisplay": " For Detailed instructions go [here](https://sibartlett.github.io/homebridge-wink3/)",
+    "footerDisplay": "This plugin is no longer being maintained but should work.",
     "schema": {
       "type": "object",
       "properties": {

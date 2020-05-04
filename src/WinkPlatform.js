@@ -3,7 +3,7 @@ const fs = require("fs");
 
 const _ = require("lodash");
 const compareVersions = require("compare-versions");
-const Joi = require("joi");
+const Joi = require("@hapi/joi");
 
 const Accessories = require("./Accessories");
 const AccessoryHelper = require("./AccessoryHelper");
@@ -40,26 +40,24 @@ module.exports = class WinkPlatform {
       definitions: this.definitions,
       hap: api.hap,
       log,
-      onChange: this.handleAccessoryStateChange.bind(this)
+      onChange: this.handleAccessoryStateChange.bind(this),
     });
     this.client = new WinkClient({
       config: this.config,
       log,
-      updateConfig: config => this.updateConfig(config)
+      updateConfig: (config) => this.updateConfig(config),
     });
     this.interval = null;
     this.subscriptions = new Subscriptions();
 
     this.subscriptions.on("device-list", () => this.refreshDevices());
-    this.subscriptions.on("device-update", device => {
+    this.subscriptions.on("device-update", (device) => {
       this.log(
-        `Received update notification: ${device.name} (${device.object_type}/${
-          device.object_id
-        })`
+        `Received update notification: ${device.name} (${device.object_type}/${device.object_id})`
       );
       this.updateDevice(device);
     });
-    this.subscriptions.on("unknown-message", message => {
+    this.subscriptions.on("unknown-message", (message) => {
       this.log.warn("Received unknown notification:", message);
     });
 
@@ -70,7 +68,7 @@ module.exports = class WinkPlatform {
     const configPath = this.api.user.configPath();
     const file = fs.readFileSync(configPath);
     const config = JSON.parse(file);
-    const platConfig = config.platforms.find(x => x.name == this.config.name);
+    const platConfig = config.platforms.find((x) => x.name == this.config.name);
     _.extend(platConfig, newConfig);
     const serializedConfig = JSON.stringify(config, null, "  ");
     fs.writeFileSync(configPath, serializedConfig, "utf8");
@@ -98,11 +96,11 @@ module.exports = class WinkPlatform {
       outlet_ids: [],
       switch_ids: [],
       window_ids: [],
-      ...config
+      ...config,
     };
 
-    ["fan_ids", "hide_ids", "window_ids"].forEach(field => {
-      newConfig[field] = newConfig[field].map(id => id.toString());
+    ["fan_ids", "hide_ids", "window_ids"].forEach((field) => {
+      newConfig[field] = newConfig[field].map((id) => id.toString());
     });
 
     return newConfig;
@@ -120,9 +118,7 @@ module.exports = class WinkPlatform {
     this.patchAccessory(accessory);
     this.accessories.add(accessory);
     this.log(
-      `Loaded from cache: ${accessory.context.name} (${
-        accessory.context.object_type
-      }/${accessory.context.object_id})`
+      `Loaded from cache: ${accessory.context.name} (${accessory.context.object_type}/${accessory.context.object_id})`
     );
   }
 
@@ -134,12 +130,12 @@ module.exports = class WinkPlatform {
       accessory.context
     );
     Object.defineProperty(accessory, "merged_state", {
-      get: function() {
+      get: function () {
         return {
           ...this.context.last_reading,
-          ...this.context.desired_state
+          ...this.context.desired_state,
         };
-      }
+      },
     });
   }
 
@@ -147,7 +143,7 @@ module.exports = class WinkPlatform {
     const authenticated = await this.client.authenticate();
 
     if (authenticated) {
-      this.accessories.forEach(accessory => {
+      this.accessories.forEach((accessory) => {
         const device = accessory.context;
         const newAccessory = this.getNewAccessory(device);
 
@@ -177,9 +173,7 @@ module.exports = class WinkPlatform {
     this.api.registerPlatformAccessories(pluginName, platformName, [accessory]);
     this.accessories.add(accessory);
     this.log(
-      `Added: ${accessory.context.name} (${accessory.context.object_type}/${
-        accessory.context.object_id
-      })`
+      `Added: ${accessory.context.name} (${accessory.context.object_type}/${accessory.context.object_id})`
     );
   }
 
@@ -225,11 +219,11 @@ module.exports = class WinkPlatform {
     const supportedDevices = [];
     const ignoreDevices = [];
 
-    const currentDevices = devices.filter(device => !device.hidden_at);
+    const currentDevices = devices.filter((device) => !device.hidden_at);
 
     currentDevices
-      .filter(device => device.object_type !== "hub")
-      .forEach(device => {
+      .filter((device) => device.object_type !== "hub")
+      .forEach((device) => {
         const definition = this.definitions[device.object_type];
 
         if (!definition) {
@@ -256,10 +250,12 @@ module.exports = class WinkPlatform {
         supportedDevices.push(device);
       });
 
-    const hubIds = supportedDevices.filter(x => x.hub_id).map(x => x.hub_id);
+    const hubIds = supportedDevices
+      .filter((x) => x.hub_id)
+      .map((x) => x.hub_id);
 
     const hubs = currentDevices.filter(
-      device =>
+      (device) =>
         device.object_type === "hub" &&
         hubIds.includes(device.hub_id) &&
         device.last_reading.ip_address
@@ -282,12 +278,10 @@ module.exports = class WinkPlatform {
   removeAccessory(accessory) {
     if (this.accessories.remove(accessory)) {
       this.api.unregisterPlatformAccessories(pluginName, platformName, [
-        accessory
+        accessory,
       ]);
       this.log(
-        `Removed: ${accessory.context.name} (${accessory.context.object_type}/${
-          accessory.context.object_id
-        })`
+        `Removed: ${accessory.context.name} (${accessory.context.object_type}/${accessory.context.object_id})`
       );
     }
   }

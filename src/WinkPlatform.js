@@ -21,7 +21,7 @@ module.exports = class WinkPlatform {
       return;
     }
 
-    const result = Joi.validate(config, configSchema);
+    const result = configSchema.validate(config);
     if (result.error) {
       log.error("Invalid config.", result.error.message);
       return;

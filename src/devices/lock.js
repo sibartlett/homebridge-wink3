@@ -10,7 +10,7 @@ module.exports = ({ Characteristic, Service }) => {
         characteristics: [
           {
             characteristic: Characteristic.LockCurrentState,
-            get: state => {
+            get: (state) => {
               switch (state.locked) {
                 case true:
                   return Characteristic.LockCurrentState.SECURED;
@@ -19,7 +19,7 @@ module.exports = ({ Characteristic, Service }) => {
                 default:
                   return Characteristic.LockCurrentState.UNKNOWN;
               }
-            }
+            },
           },
           {
             characteristic: Characteristic.LockTargetState,
@@ -33,19 +33,19 @@ module.exports = ({ Characteristic, Service }) => {
                   return Characteristic.LockCurrentState.UNKNOWN;
               }
             },
-            set: value => ({
+            set: (value) => ({
               locked:
                 value === true ||
-                value === Characteristic.LockTargetState.SECURED
-            })
-          }
-        ]
+                value === Characteristic.LockTargetState.SECURED,
+            }),
+          },
+        ],
       },
       batteryService({
         Characteristic,
         Service,
-        notCharging: true
-      })
-    ]
+        notCharging: true,
+      }),
+    ],
   };
 };

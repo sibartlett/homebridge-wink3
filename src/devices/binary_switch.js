@@ -8,7 +8,7 @@ const isOutlet = (state, device, config) =>
 const isSwitch = (state, device, config) =>
   config.switch_ids.indexOf(device.object_id) !== -1;
 
-const isValve = state => state.opened !== undefined;
+const isValve = (state) => state.opened !== undefined;
 
 const isLightBulb = (state, device, config) =>
   !isFan(state, device, config) &&
@@ -27,10 +27,10 @@ module.exports = ({ Characteristic, Service }) => {
         characteristics: [
           {
             characteristic: Characteristic.On,
-            get: state => state.powered,
-            set: value => ({ powered: !!value })
-          }
-        ]
+            get: (state) => state.powered,
+            set: (value) => ({ powered: !!value }),
+          },
+        ],
       },
       {
         service: Service.Lightbulb,
@@ -38,10 +38,10 @@ module.exports = ({ Characteristic, Service }) => {
         characteristics: [
           {
             characteristic: Characteristic.On,
-            get: state => state.powered,
-            set: value => ({ powered: !!value })
-          }
-        ]
+            get: (state) => state.powered,
+            set: (value) => ({ powered: !!value }),
+          },
+        ],
       },
       {
         service: Service.Outlet,
@@ -49,15 +49,15 @@ module.exports = ({ Characteristic, Service }) => {
         characteristics: [
           {
             characteristic: Characteristic.On,
-            get: state => state.powered,
-            set: value => ({ powered: !!value })
+            get: (state) => state.powered,
+            set: (value) => ({ powered: !!value }),
           },
           {
             characteristic: Characteristic.OutletInUse,
-            get: state =>
-              state.consumption ? state.consumption > 0.1 : state.powered
-          }
-        ]
+            get: (state) =>
+              state.consumption ? state.consumption > 0.1 : state.powered,
+          },
+        ],
       },
       {
         service: Service.Switch,
@@ -65,10 +65,10 @@ module.exports = ({ Characteristic, Service }) => {
         characteristics: [
           {
             characteristic: Characteristic.On,
-            get: state => state.powered,
-            set: value => ({ powered: !!value })
-          }
-        ]
+            get: (state) => state.powered,
+            set: (value) => ({ powered: !!value }),
+          },
+        ],
       },
       {
         service: Service.Valve,
@@ -76,15 +76,15 @@ module.exports = ({ Characteristic, Service }) => {
         characteristics: [
           {
             characteristic: Characteristic.Active,
-            get: state => state.opened,
-            set: value => ({ opened: !!value })
+            get: (state) => state.opened,
+            set: (value) => ({ opened: !!value }),
           },
           {
             characteristic: Characteristic.InUse,
-            get: state => state.opened
-          }
-        ]
-      }
-    ]
+            get: (state) => state.opened,
+          },
+        ],
+      },
+    ],
   };
 };

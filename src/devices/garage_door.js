@@ -16,29 +16,29 @@ module.exports = ({ Characteristic, Service }) => {
               else if (desired_state.position == 1)
                 return Characteristic.TargetDoorState.OPEN;
             },
-            set: value => ({
-              position: value == Characteristic.TargetDoorState.OPEN ? 1 : 0
-            })
+            set: (value) => ({
+              position: value == Characteristic.TargetDoorState.OPEN ? 1 : 0,
+            }),
           },
           {
             characteristic: Characteristic.CurrentDoorState,
-            get: state => {
+            get: (state) => {
               if (state.position == 0)
                 return Characteristic.CurrentDoorState.CLOSED;
               else if (state.position == 1)
                 return Characteristic.CurrentDoorState.OPEN;
-            }
+            },
           },
           {
             characteristic: Characteristic.ObstructionDetected,
-            value: false
-          }
-        ]
+            value: false,
+          },
+        ],
       },
       batteryService({
         Characteristic,
-        Service
-      })
-    ]
+        Service,
+      }),
+    ],
   };
 };

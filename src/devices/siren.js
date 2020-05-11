@@ -8,11 +8,11 @@ module.exports = ({ Characteristic, Service }) => {
         characteristics: [
           {
             characteristic: Characteristic.Name,
-            value: "Strobe"
+            value: "Strobe",
           },
           {
             characteristic: Characteristic.On,
-            get: state => state.powered && state.mode !== "siren_only",
+            get: (state) => state.powered && state.mode !== "siren_only",
             set: (value, accessory) => {
               const state = accessory.context.last_reading;
               if (value) {
@@ -27,20 +27,20 @@ module.exports = ({ Characteristic, Service }) => {
                   return { mode: "siren_only" };
                 else return { powered: false };
               }
-            }
-          }
-        ]
+            },
+          },
+        ],
       },
       {
         service: Service.Switch,
         characteristics: [
           {
             characteristic: Characteristic.Name,
-            value: "Siren"
+            value: "Siren",
           },
           {
             characteristic: Characteristic.On,
-            get: state => state.powered && state.mode !== "strobe_only",
+            get: (state) => state.powered && state.mode !== "strobe_only",
             set: (value, accessory) => {
               const state = accessory.context.last_reading;
               if (value) {
@@ -55,10 +55,10 @@ module.exports = ({ Characteristic, Service }) => {
                   return { mode: "strobe_only" };
                 else return { powered: false };
               }
-            }
-          }
-        ]
-      }
-    ]
+            },
+          },
+        ],
+      },
+    ],
   };
 };

@@ -8,7 +8,7 @@ module.exports = ({ Characteristic, Service }) => {
         characteristics: [
           {
             characteristic: Characteristic.CurrentHeatingCoolingState,
-            get: state => {
+            get: (state) => {
               if (!state.powered) {
                 return Characteristic.CurrentHeatingCoolingState.OFF;
               }
@@ -26,11 +26,11 @@ module.exports = ({ Characteristic, Service }) => {
                   //If it is fan_only or anything else then we'll report the thermostat as off.
                   return Characteristic.CurrentHeatingCoolingState.OFF;
               }
-            }
+            },
           },
           {
             characteristic: Characteristic.TargetHeatingCoolingState,
-            get: state => {
+            get: (state) => {
               if (!state.powered) {
                 return Characteristic.TargetHeatingCoolingState.OFF;
               }
@@ -44,7 +44,7 @@ module.exports = ({ Characteristic, Service }) => {
                   return Characteristic.TargetHeatingCoolingState.OFF;
               }
             },
-            set: value => {
+            set: (value) => {
               switch (value) {
                 case Characteristic.TargetHeatingCoolingState.COOL:
                   return { powered: true, mode: "cool_only" };
@@ -53,31 +53,31 @@ module.exports = ({ Characteristic, Service }) => {
                 case Characteristic.TargetHeatingCoolingState.OFF:
                   return { powered: false };
               }
-            }
+            },
           },
           {
             characteristic: Characteristic.CurrentTemperature,
-            get: state => state.temperature
+            get: (state) => state.temperature,
           },
           {
             characteristic: Characteristic.TargetTemperature,
             get: (state, desired_state) => desired_state.max_set_point,
-            set: value => ({ max_set_point: value })
+            set: (value) => ({ max_set_point: value }),
           },
           {
             characteristic: Characteristic.TemperatureDisplayUnits,
-            get: state =>
+            get: (state) =>
               state.units === "c"
                 ? Characteristic.TemperatureDisplayUnits.CELSIUS
-                : Characteristic.TemperatureDisplayUnits.FAHRENHEIT
+                : Characteristic.TemperatureDisplayUnits.FAHRENHEIT,
           },
           {
             characteristic: Characteristic.RotationSpeed,
-            get: state => state.fan_speed * 100,
-            set: value => ({ fan_speed: value / 100 })
-          }
-        ]
-      }
-    ]
+            get: (state) => state.fan_speed * 100,
+            set: (value) => ({ fan_speed: value / 100 }),
+          },
+        ],
+      },
+    ],
   };
 };

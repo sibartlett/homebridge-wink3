@@ -10,30 +10,30 @@ module.exports = ({ Characteristic, Service }) => {
         characteristics: [
           {
             characteristic: Characteristic.CarbonMonoxideDetected,
-            get: state =>
+            get: (state) =>
               state.co_detected
                 ? Characteristic.CarbonMonoxideDetected.CO_LEVELS_ABNORMAL
-                : Characteristic.CarbonMonoxideDetected.CO_LEVELS_NORMAL
-          }
-        ]
+                : Characteristic.CarbonMonoxideDetected.CO_LEVELS_NORMAL,
+          },
+        ],
       },
       {
         service: Service.SmokeSensor,
         characteristics: [
           {
             characteristic: Characteristic.SmokeDetected,
-            get: state =>
+            get: (state) =>
               state.smoke_detected
                 ? Characteristic.SmokeDetected.SMOKE_DETECTED
-                : Characteristic.SmokeDetected.SMOKE_NOT_DETECTED
-          }
-        ]
+                : Characteristic.SmokeDetected.SMOKE_NOT_DETECTED,
+          },
+        ],
       },
       batteryService({
         Characteristic,
         Service,
-        notCharging: true
-      })
-    ]
+        notCharging: true,
+      }),
+    ],
   };
 };

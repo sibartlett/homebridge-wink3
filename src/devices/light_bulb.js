@@ -23,56 +23,56 @@ module.exports = ({ Characteristic, Service }) => {
         characteristics: [
           {
             characteristic: Characteristic.On,
-            get: state => state.powered,
-            set: value => ({ powered: !!value })
+            get: (state) => state.powered,
+            set: (value) => ({ powered: !!value }),
           },
           {
             characteristic: Characteristic.Brightness,
-            supported: state => state.brightness !== undefined,
-            get: state => Math.floor(state.brightness * 100),
-            set: value => ({ brightness: value / 100 })
+            supported: (state) => state.brightness !== undefined,
+            get: (state) => Math.floor(state.brightness * 100),
+            set: (value) => ({ brightness: value / 100 }),
           },
           {
             characteristic: Characteristic.ColorTemperature,
-            supported: state =>
+            supported: (state) =>
               state.color_temperature !== undefined &&
               state.hue === undefined &&
               state.saturation === undefined,
-            get: state => Math.floor(1000000 / state.color_temperature),
-            set: value => ({
+            get: (state) => Math.floor(1000000 / state.color_temperature),
+            set: (value) => ({
               color_model: "color_temperature",
-              color_temperature: 1000000 / value
-            })
+              color_temperature: 1000000 / value,
+            }),
           },
           {
             characteristic: Characteristic.Hue,
-            supported: state => state.hue !== undefined,
-            get: state => Math.floor(state.hue * 360),
+            supported: (state) => state.hue !== undefined,
+            get: (state) => Math.floor(state.hue * 360),
             set: (value, accessory) => {
               const state = accessory.merged_state;
               return {
                 brightness: state.brightness,
                 color_model: "hsb",
                 hue: value / 360,
-                saturation: state.saturation
+                saturation: state.saturation,
               };
-            }
+            },
           },
           {
             characteristic: Characteristic.Saturation,
-            supported: state => state.saturation !== undefined,
-            get: state => Math.floor(state.saturation * 100),
+            supported: (state) => state.saturation !== undefined,
+            get: (state) => Math.floor(state.saturation * 100),
             set: (value, accessory) => {
               const state = accessory.merged_state;
               return {
                 brightness: state.brightness,
                 color_model: "hsb",
                 hue: state.hue,
-                saturation: value / 360
+                saturation: value / 360,
               };
-            }
-          }
-        ]
+            },
+          },
+        ],
       },
       {
         service: Service.Fan,
@@ -80,16 +80,16 @@ module.exports = ({ Characteristic, Service }) => {
         characteristics: [
           {
             characteristic: Characteristic.On,
-            get: state => state.powered,
-            set: value => ({ powered: !!value })
+            get: (state) => state.powered,
+            set: (value) => ({ powered: !!value }),
           },
           {
             characteristic: Characteristic.RotationSpeed,
-            supported: state => state.brightness !== undefined,
-            get: state => Math.floor(state.brightness * 100),
-            set: value => ({ brightness: value / 100 })
-          }
-        ]
+            supported: (state) => state.brightness !== undefined,
+            get: (state) => Math.floor(state.brightness * 100),
+            set: (value) => ({ brightness: value / 100 }),
+          },
+        ],
       },
       {
         service: Service.Outlet,
@@ -97,14 +97,14 @@ module.exports = ({ Characteristic, Service }) => {
         characteristics: [
           {
             characteristic: Characteristic.On,
-            get: state => state.powered,
-            set: value => ({ powered: !!value })
+            get: (state) => state.powered,
+            set: (value) => ({ powered: !!value }),
           },
           {
             characteristic: Characteristic.OutletInUse,
-            get: state => state.powered
-          }
-        ]
+            get: (state) => state.powered,
+          },
+        ],
       },
       {
         service: Service.Switch,
@@ -112,16 +112,16 @@ module.exports = ({ Characteristic, Service }) => {
         characteristics: [
           {
             characteristic: Characteristic.On,
-            get: state => state.powered,
-            set: value => ({ powered: !!value })
+            get: (state) => state.powered,
+            set: (value) => ({ powered: !!value }),
           },
           {
             characteristic: Characteristic.On,
-            get: state => state.opened,
-            set: value => ({ opened: !!value })
-          }
-        ]
-      }
-    ]
+            get: (state) => state.opened,
+            set: (value) => ({ opened: !!value }),
+          },
+        ],
+      },
+    ],
   };
 };

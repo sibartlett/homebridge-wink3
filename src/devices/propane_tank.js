@@ -8,8 +8,8 @@ module.exports = ({ Characteristic, Service }) => {
       batteryService({
         Characteristic,
         Service,
-        field: "remaining"
-      })
-    ]
+        field: "remaining",
+      }),
+    ],
   };
 };

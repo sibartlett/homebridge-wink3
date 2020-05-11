@@ -8,27 +8,27 @@ module.exports = ({ Characteristic, Service }) => {
         characteristics: [
           {
             characteristic: Characteristic.On,
-            get: state => state.powered,
-            set: value => ({ powered: !!value })
+            get: (state) => state.powered,
+            set: (value) => ({ powered: !!value }),
           },
           {
             characteristic: Characteristic.RotationDirection,
-            supported: state => state.direction !== undefined,
-            get: state =>
+            supported: (state) => state.direction !== undefined,
+            get: (state) =>
               state.direction === "forward"
                 ? Characteristic.RotationDirection.CLOCKWISE
                 : Characteristic.RotationDirection.COUNTER_CLOCKWISE,
-            set: value => ({
+            set: (value) => ({
               direction:
                 value === Characteristic.RotationDirection.CLOCKWISE
                   ? "forward"
-                  : "reverse"
-            })
+                  : "reverse",
+            }),
           },
           {
             characteristic: Characteristic.RotationSpeed,
-            supported: state => state.mode !== undefined,
-            get: state => {
+            supported: (state) => state.mode !== undefined,
+            get: (state) => {
               switch (state.mode) {
                 case "auto":
                   return 50;
@@ -44,7 +44,7 @@ module.exports = ({ Characteristic, Service }) => {
                   return 0;
               }
             },
-            set: value => {
+            set: (value) => {
               const stepped = 25 * Math.round(value / 25);
               let mode = "lowest";
               if (stepped > 25) {
@@ -57,10 +57,10 @@ module.exports = ({ Characteristic, Service }) => {
                 mode = "high";
               }
               return { mode };
-            }
-          }
-        ]
-      }
-    ]
+            },
+          },
+        ],
+      },
+    ],
   };
 };

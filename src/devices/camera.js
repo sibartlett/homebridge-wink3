@@ -7,13 +7,13 @@ module.exports = ({ Characteristic, Service }) => {
     services: [
       {
         service: Service.MotionSensor,
-        supported: state => state.motion !== undefined,
+        supported: (state) => state.motion !== undefined,
         characteristics: [
           {
             characteristic: Characteristic.MotionDetected,
-            get: state => state.motion
-          }
-        ]
+            get: (state) => state.motion,
+          },
+        ],
       },
       {
         service: Service.SecuritySystem,
@@ -22,7 +22,7 @@ module.exports = ({ Characteristic, Service }) => {
         characteristics: [
           {
             characteristic: Characteristic.SecuritySystemCurrentState,
-            get: state => {
+            get: (state) => {
               switch (state.mode) {
                 case "away":
                   return Characteristic.SecuritySystemCurrentState.AWAY_ARM;
@@ -33,7 +33,7 @@ module.exports = ({ Characteristic, Service }) => {
                 default:
                   return Characteristic.SecuritySystemCurrentState.DISARMED;
               }
-            }
+            },
           },
           {
             characteristic: Characteristic.SecuritySystemTargetState,
@@ -49,7 +49,7 @@ module.exports = ({ Characteristic, Service }) => {
                   return Characteristic.SecuritySystemTargetState.DISARMED;
               }
             },
-            set: value => {
+            set: (value) => {
               switch (value) {
                 case Characteristic.SecuritySystemTargetState.AWAY_ARM:
                   return { powered: true, mode: "away" };
@@ -60,15 +60,15 @@ module.exports = ({ Characteristic, Service }) => {
                 case Characteristic.SecuritySystemTargetState.DISARMED:
                   return { powered: false };
               }
-            }
-          }
-        ]
+            },
+          },
+        ],
       },
       batteryService({
         Characteristic,
         Service,
-        notCharging: true
-      })
-    ]
+        notCharging: true,
+      }),
+    ],
   };
 };

@@ -18,19 +18,19 @@ module.exports = ({ Characteristic, Service }) => {
       // },
       {
         service: Service.MotionSensor,
-        supported: state => state.motion !== undefined,
+        supported: (state) => state.motion !== undefined,
         characteristics: [
           {
             characteristic: Characteristic.MotionDetected,
-            get: state => state.motion
-          }
-        ]
+            get: (state) => state.motion,
+          },
+        ],
       },
       batteryService({
         Characteristic,
         Service,
-        notCharging: true
-      })
-    ]
+        notCharging: true,
+      }),
+    ],
   };
 };

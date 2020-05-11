@@ -11,23 +11,23 @@ module.exports = ({ Characteristic, Service }) => {
           {
             characteristic: Characteristic.TargetPosition,
             get: (state, desired_state) => desired_state.position * 100,
-            set: value => ({ position: value / 100 })
+            set: (value) => ({ position: value / 100 }),
           },
           {
             characteristic: Characteristic.CurrentPosition,
-            get: state => state.position * 100
+            get: (state) => state.position * 100,
           },
           {
             characteristic: Characteristic.PositionState,
-            value: Characteristic.PositionState.STOPPED
-          }
-        ]
+            value: Characteristic.PositionState.STOPPED,
+          },
+        ],
       },
       batteryService({
         Characteristic,
         Service,
-        notCharging: true
-      })
-    ]
+        notCharging: true,
+      }),
+    ],
   };
 };

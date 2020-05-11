@@ -10,7 +10,7 @@ module.exports = ({ Characteristic, Service }) => {
         characteristics: [
           {
             characteristic: Characteristic.CurrentHeatingCoolingState,
-            get: state => {
+            get: (state) => {
               if (!state.powered) {
                 return Characteristic.CurrentHeatingCoolingState.OFF;
               }
@@ -30,7 +30,7 @@ module.exports = ({ Characteristic, Service }) => {
                   //The above list should be inclusive, but we need to return something if they change stuff.
                   return Characteristic.CurrentHeatingCoolingState.OFF;
               }
-            }
+            },
           },
           {
             characteristic: Characteristic.TargetHeatingCoolingState,
@@ -53,7 +53,7 @@ module.exports = ({ Characteristic, Service }) => {
                   return Characteristic.TargetHeatingCoolingState.OFF;
               }
             },
-            set: value => {
+            set: (value) => {
               switch (value) {
                 case Characteristic.TargetHeatingCoolingState.COOL:
                   return { powered: true, mode: "cool_only" };
@@ -64,11 +64,11 @@ module.exports = ({ Characteristic, Service }) => {
                 case Characteristic.TargetHeatingCoolingState.OFF:
                   return { powered: false };
               }
-            }
+            },
           },
           {
             characteristic: Characteristic.CurrentTemperature,
-            get: state => state.temperature
+            get: (state) => state.temperature,
           },
           {
             characteristic: Characteristic.TargetTemperature,
@@ -89,39 +89,39 @@ module.exports = ({ Characteristic, Service }) => {
 
               return desired_state.min_set_point;
             },
-            set: value => ({
+            set: (value) => ({
               min_set_point: value,
-              max_set_point: value + 0.5555556
-            })
+              max_set_point: value + 0.5555556,
+            }),
           },
           {
             characteristic: Characteristic.TemperatureDisplayUnits,
-            get: state =>
+            get: (state) =>
               state.units === "c"
                 ? Characteristic.TemperatureDisplayUnits.CELSIUS
-                : Characteristic.TemperatureDisplayUnits.FAHRENHEIT
+                : Characteristic.TemperatureDisplayUnits.FAHRENHEIT,
           },
           {
             characteristic: Characteristic.HeatingThresholdTemperature,
-            get: state => state.min_set_point,
-            set: value => ({ min_set_point: value })
+            get: (state) => state.min_set_point,
+            set: (value) => ({ min_set_point: value }),
           },
           {
             characteristic: Characteristic.CoolingThresholdTemperature,
-            get: state => state.max_set_point,
-            set: value => ({ max_set_point: value })
+            get: (state) => state.max_set_point,
+            set: (value) => ({ max_set_point: value }),
           },
           {
             characteristic: Characteristic.CurrentRelativeHumidity,
-            supported: state => state.humidity !== undefined,
-            get: state => state.humidity
-          }
-        ]
+            supported: (state) => state.humidity !== undefined,
+            get: (state) => state.humidity,
+          },
+        ],
       },
       batteryService({
         Characteristic,
-        Service
-      })
-    ]
+        Service,
+      }),
+    ],
   };
 };

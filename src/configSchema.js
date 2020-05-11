@@ -1,4 +1,4 @@
-const Joi = require("joi");
+const Joi = require("@hapi/joi");
 
 module.exports = Joi.object()
   .keys({
@@ -12,7 +12,7 @@ module.exports = Joi.object()
     password: Joi.string(),
 
     access_token: Joi.string(),
-    refresh_token: Joi.string()
+    refresh_token: Joi.string(),
   })
   .unknown()
   .with("username", "password");

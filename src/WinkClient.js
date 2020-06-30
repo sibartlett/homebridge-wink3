@@ -38,7 +38,7 @@ module.exports = class WinkClient {
 
     return request({
       baseUrl: hub
-        ? `https://${hub.device.last_reading.ip_address}:8888`
+        ? `https://${hub.device.last_reading.ip_address}:8889`
         : "https://api.wink.com",
       strictSSL: !hub,
       json: true,
@@ -112,7 +112,7 @@ module.exports = class WinkClient {
       }
 
       const ipAddress = ip.address("public", "ipv4");
-      const redirectUri = `http://${ipAddress}:8888`;
+      const redirectUri = `http://${ipAddress}:8889`;
       const state = Date.now().toString();
 
       this.log.warn(
@@ -145,7 +145,7 @@ module.exports = class WinkClient {
         }
       });
 
-      server.listen(8888);
+      server.listen(8889);
     });
   }
 

@@ -103,7 +103,10 @@ module.exports = class AccessoryHelper {
     // First argument is current state
     // Second argument is desired state (merged state)
     const value = get(accessory.context.last_reading, accessory.merged_state);
-    callback(null, value);
+    if (accessory.context.last_reading.connection)
+       callback(null, value);
+    else
+       callback("no_response");
   }
 
   writeAccessory(accessory, set, value, callback) {
